@@ -1,0 +1,19 @@
+{
+  "name": "taz",
+  "version": "1.0.0",
+  "description": "EMR application for doctors and patients to share information",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afreem66/taz.git"
+  },
+  "author": "Andrew Freeman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/afreem66/taz/issues"
+  },
+  "homepage": "https://github.com/afreem66/taz#readme"
+}
