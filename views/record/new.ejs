@@ -1,9 +1,10 @@
-  <form class="new-record" action="/records/new" method="POST">
-    <label for="date">Date</label>
+  <form ng-controller="RecordController as record"
+      ng-submit="record.create()" class="new-record" action="/record/new" method="POST">
+    <!-- <label for="date">Date</label>
     <input type="date"
            name="record[date]"
            id="date">
-     </br>
+     </br> -->
      <label for="body-system">Body System</label>
      <input type="text"
             name="record[bodySystem]"

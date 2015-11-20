@@ -1,6 +1,6 @@
 var express = require('express'),
     server = express(),
-    PORT = process.env.PORT || 5432,
+    PORT = process.env.PORT || 8000,
     MONGOURI = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
     db = 'taz',
     mongoose = require('mongoose'),
@@ -21,9 +21,9 @@ server.use(methodOverride('_method'));
 
 server.use(bodyParser.json());
 
-server.use(bodyParser.urlencoded( {
-  extended: true
-}));
+// server.use(bodyParser.urlencoded( {
+//   extended: true
+// }));
 
 server.use(morgan('dev'));
 
@@ -48,7 +48,7 @@ server.post('/record/new', function (req, res) {
 });
 
 server.get('/record/index', function (req, res) {
-  res.render('render/index');
+  res.render('record/index');
 });
 
 server.use('/', function (req, res) {
@@ -58,5 +58,5 @@ server.use('/', function (req, res) {
 mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)
 server.listen(PORT, function () {
-  console.log("ayyyyyyy");
+  console.log("ayyyyyyy we on port " + PORT);
 });
