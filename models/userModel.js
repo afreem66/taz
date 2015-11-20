@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
       records: [ {type: Number} ],
       medications: [ {type: String} ],
       pendingRequests: [ {type: Number} ]
-    }, {collection: 'user', post: false});
+    }, {collection: 'user', strict: false});
 
     var User = mongoose.model('User', userSchema);
 
