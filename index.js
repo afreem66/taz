@@ -2,7 +2,7 @@ var express = require('express'),
     server = express(),
     PORT = process.env.PORT || 5432,
     MONGOURI = process.env.MONGOLAB_URI || "mongodb://localhost:27017",
-    db = taz,
+    db = 'taz',
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     ejs = require('ejs'),
@@ -41,7 +41,7 @@ server.use('/', function (req, res) {
   res.render('home');
 })
 
-mongoose.connect(MONGOURI + "/" + dbname);
+mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)
 server.listen(PORT, function () {
   console.log("ayyyyyyy");
