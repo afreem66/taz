@@ -10,10 +10,11 @@ var express = require('express'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
     session = require('express-session'),
-    bcrypt = require('bcryptjs');
+    bcrypt = require('bcryptjs'),
+    Record = require('./models/recordModel.js')
 
-server.set('views', './views');
-server.set('view engine', 'ejs');
+// server.set('views', './views');
+// server.set('view engine', 'ejs');
 
 server.use(express.static('./public'));
 
@@ -27,33 +28,33 @@ server.use(bodyParser.json());
 
 server.use(morgan('dev'));
 
-server.use(expressLayouts);
-
-server.get('/user/doctor/login', function (req, res) {
-  res.render('user/doctor/login');
-});
-
-server.get('/user/patient/login', function (req, res) {
-  res.render('user/patient/login');
-});
-
-server.get('/record/new', function (req, res) {
-  res.render('record/new');
-});
-
-server.post('/record/new', function (req, res) {
-  Record.create(req.body, function(req, res) {
-    res.redirect(302, '/record/index');
-  });
-});
-
-server.get('/record/index', function (req, res) {
-  res.render('record/index');
-});
-
-server.use('/', function (req, res) {
-  res.render('home');
-})
+// server.use(expressLayouts);
+//
+// server.get('/user/doctor/login', function (req, res) {
+//   res.render('user/doctor/login');
+// });
+//
+// server.get('/user/patient/login', function (req, res) {
+//   res.render('user/patient/login');
+// });
+//
+// server.get('/record/new', function (req, res) {
+//   res.render('record/new');
+// });
+//
+// server.post('/record/new', function (req, res) {
+//   Record.create(req.body, function(req, res) {
+//     res.redirect(302, '/record/index');
+//   });
+// });
+//
+// server.get('/record/index', function (req, res) {
+//   res.render('record/index');
+// });
+//
+// // server.use('/', function (req, res) {
+// //   res.render('home');
+// // })
 
 mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)
