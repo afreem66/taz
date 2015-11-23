@@ -5,16 +5,11 @@ var express = require('express'),
     db = 'taz',
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
-    ejs = require('ejs'),
-    expressLayouts = require('express-ejs-layouts'),
     methodOverride = require('method-override'),
     morgan = require('morgan'),
     session = require('express-session'),
     bcrypt = require('bcryptjs'),
     Record = require('./models/recordModel.js')
-
-server.set('views', './views');
-server.set('view engine', 'ejs');
 
 server.use(express.static('./public'));
 
@@ -27,8 +22,6 @@ server.use(bodyParser.json());
 // }));
 
 server.use(morgan('dev'));
-
-server.use(expressLayouts);
 //
 // server.get('/user/doctor/login', function (req, res) {
 //   res.render('user/doctor/login');
@@ -52,7 +45,7 @@ server.use(expressLayouts);
 //   res.render('record/index');
 // });
 //
-server.get('*', function (req, res) {
+server.use('/', function (req, res) {
   res.render('index');
 });
 
