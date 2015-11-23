@@ -13,8 +13,8 @@ var express = require('express'),
     bcrypt = require('bcryptjs'),
     Record = require('./models/recordModel.js')
 
-// server.set('views', './views');
-// server.set('view engine', 'ejs');
+server.set('views', './views');
+server.set('view engine', 'ejs');
 
 server.use(express.static('./public'));
 
@@ -28,7 +28,7 @@ server.use(bodyParser.json());
 
 server.use(morgan('dev'));
 
-// server.use(expressLayouts);
+server.use(expressLayouts);
 //
 // server.get('/user/doctor/login', function (req, res) {
 //   res.render('user/doctor/login');
@@ -52,9 +52,9 @@ server.use(morgan('dev'));
 //   res.render('record/index');
 // });
 //
-// // server.use('/', function (req, res) {
-// //   res.render('home');
-// // })
+server.get('*', function (req, res) {
+  res.render('index');
+});
 
 mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)
