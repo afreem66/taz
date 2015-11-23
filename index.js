@@ -22,32 +22,10 @@ server.use(bodyParser.json());
 // }));
 
 server.use(morgan('dev'));
-//
-// server.get('/user/doctor/login', function (req, res) {
-//   res.render('user/doctor/login');
+
+// server.use('/', function (req, res) {
+//   res.render('index');
 // });
-//
-// server.get('/user/patient/login', function (req, res) {
-//   res.render('user/patient/login');
-// });
-//
-// server.get('/record/new', function (req, res) {
-//   res.render('record/new');
-// });
-//
-// server.post('/record/new', function (req, res) {
-//   Record.create(req.body, function(req, res) {
-//     res.redirect(302, '/record/index');
-//   });
-// });
-//
-// server.get('/record/index', function (req, res) {
-//   res.render('record/index');
-// });
-//
-server.use('/', function (req, res) {
-  res.render('index');
-});
 
 mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)

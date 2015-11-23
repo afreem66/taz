@@ -9,17 +9,20 @@ app.controller('mainController', function ($scope, $route, $routeParams, $locati
   $scope.$routeParams = $routeParams;
 });
 
-app.controller('recordController', ['$http', '$scope' function($http, $scope){
+app.controller('recordController', ['$http', function($http) {
+  console.log('records');
   var controller = this;
-  $http.get('records').success(function(data){
-
-    console.log("this is index " + data);
-    // controller.records = data;
-  });
+  // $http.get('records').success(function(data){
+  //
+  //   console.log("this is index " + data);
+  //   // controller.records = data;
+  // });
 
   this.create = function(){
     $http.post('/record/new', {
-      record_value: this.value
+      bodySystem: this.bodySystem,
+      description: this.description,
+      treatment: this.treatment
     }).success(function(data){
 
       console.log("this is create " + data);
@@ -30,8 +33,13 @@ app.controller('recordController', ['$http', '$scope' function($http, $scope){
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
-  $routeProvider.when('/record/new', {
-    templateUrl: '/views/record/new.html',
-    controller: 'recordController'
+  $routeProvider.when('/', {
+    templateUrl: 'views/sign_up.html',
+    controller: 'mainController'
+  })
+  .when('/record/new', {
+    templateUrl: 'views/record/new.html',
+    controller: 'recordController',
+    controllerAs: 'recordCtrl'
   })
 }]);

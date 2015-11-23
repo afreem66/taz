@@ -1,19 +1,19 @@
-  <form class="new-record" action="/record/new" method="POST">
+  <form ng-submit="recordCtrl.create()"class="new-record" action="/record/new" method="POST">
      <label for="body-system">Body System</label>
      <input type="text"
-            name="record[bodySystem]"
+            ng-model="recordCtrl.record.bodySystem"
             id="body-system"
             placeholder="What part of the Body?">
      </br>
      <label for="description">Description</label>
      <input type="text"
-            name="record[description]"
+            ng-model="recordCtrl.record.description"
             id="description"
             placeholder="What happened?">
      </br>
      <label for="treatment">Treatment</label>
      <input type="text"
-            name="record[treatment]"
+            ng-model="recordCtrl.record.treatment"
             id="treatment"
             placeholder="How was it treated?">
      </br>
