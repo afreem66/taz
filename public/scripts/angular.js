@@ -1,14 +1,31 @@
 var app = angular.module('TazApp', ['ngRoute']);
 
-app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-  $urlRouterProvider.otherwise('/');
+app.controller('mainController', function ($scope, $route, $routeParams, $location) {
 
-  $http.get('/record/index').success(function (data) {
-      console.log("This is the index data: " + data);
-    });
-    this.new = function () {
-      $http.post('/record/new').success(function(data) {
-        console.log("This is the create data: " + data);
-      });
-    }
-}])
+});
+
+app.controller('userController', function ($scope, $routeParams) {
+
+});
+
+app.controller('recordController', function ($scope, $routeParams) {
+
+});
+
+app.config(function($routeProvider, $locationProvider) {
+  $routeProvider
+   .when('/Book/:bookId', {
+    templateUrl: 'book.html',
+    controller: 'BookController'
+  });
+
+
+//   $http.get('/record/index').success(function (data) {
+//       console.log("This is the index data: " + data);
+//     });
+//     this.new = function () {
+//       $http.post('/record/new').success(function(data) {
+//         console.log("This is the create data: " + data);
+//       });
+//     }
+// }])
