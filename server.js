@@ -23,9 +23,18 @@ server.use(bodyParser.json());
 
 server.use(morgan('dev'));
 
-// server.use('/', function (req, res) {
-//   res.render('index');
-// });
+server.get('/record/new', function(request, response){
+  Record.find({}, function(err, records){
+    response.json(records);
+  })
+});
+
+server.post('/record/new', function(request, response){
+  console.log(request.body);
+  // Record.find({}, function(err, records){
+  //   response.json(records);
+  // })
+});
 
 mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)
