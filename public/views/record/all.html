@@ -1,1 +1,31 @@
-<h1>you made a medical record, congrats I guess</h1>
+<!-- <h1>{{patient name}}</h1> -->
+<table class="u-full-width">
+  <thead>
+    <tr>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Blood Pressure</th>
+      <th>Medications</th>
+      <th>Family History</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Age</td>
+      <td>Gender</td>
+      <td>Height</td>
+      <td>Weight</td>
+      <td>Blood Pressure</td>
+      <td>Medications</td>
+      <td>Family History</td>
+    </tr>
+  <tbody/>
+<table/>
+  <li ng-repeat="record in recordCtrl.records">
+    {{record.bodySystem}}
+    {{record.time}}
+
+  </li>
+</ul>

@@ -24,9 +24,9 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
     $http.post('/records/new',
       controller.record
     ).success(function (data) {
-        $location.path('records/all')
+        $location.path('records/all');
         record = null;
-      })
+      });
   }
 
 }]);
