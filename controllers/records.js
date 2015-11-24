@@ -14,7 +14,7 @@ var express = require('express'),
 
   router.post('/new', function (req, res) {
     var newRecord = new Record({
-      comlpaint: req.body.complaint,
+      complaint: req.body.complaint,
       bodySystem : req.body.bodySystem,
       description : req.body.description,
       treatment: req.body.treatment
@@ -30,7 +30,6 @@ var express = require('express'),
 
   router.get('/all', function (req, res) {
     Record.find({}, function (err, records) {
-      console.log(records);
       res.json(records)
     });
   });

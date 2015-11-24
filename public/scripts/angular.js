@@ -10,13 +10,14 @@ app.controller('mainController', function ($scope, $route, $routeParams, $locati
 app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
   var record = {
+        complaint: "",
         bodySystem: "",
         description: "",
         treatment: ""
       }
 
+  console.log($location.path());
   $http.get('/records/all').success(function (data) {
-    console.log(data);
     controller.records = data;
   });
 
@@ -24,7 +25,8 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
     $http.post('/records/new',
       controller.record
     ).success(function (data) {
-        $location.path('records/all');
+        controller.records = data;
+        $location.path('/records/all');
         record = null;
       });
   }
