@@ -17,24 +17,13 @@ server.use(methodOverride('_method'));
 
 server.use(bodyParser.json());
 
-// server.use(bodyParser.urlencoded( {
-//   extended: true
-// }));
-
 server.use(morgan('dev'));
 
-server.get('/record/new', function(request, response){
-  Record.find({}, function(err, records){
-    response.json(records);
-  })
-});
+var recordController = require('./controllers/records.js');
+server.use('/records', recordController);
 
-server.post('/record/new', function(request, response){
-  console.log(request.body);
-  // Record.find({}, function(err, records){
-  //   response.json(records);
-  // })
-});
+var userController = require('./controllers/users.js');
+server.use('/users', userController);
 
 mongoose.connect(MONGOURI + "/" + db);
 mongoose.set('debug', true)

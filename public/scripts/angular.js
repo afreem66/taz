@@ -13,7 +13,7 @@ app.controller('recordController', ['$http', function($http) {
   var record = {
     bodySystem: "",
     description: "",
-    treatmetn: ""
+    treatment: ""
   }
   // $http.get('records').success(function(data){
   //
@@ -22,13 +22,13 @@ app.controller('recordController', ['$http', function($http) {
   // });
   console.log(this);
   this.create = function(){
-    $http.post('/record/new',
+    $http.post('/records/new',
       controller.record
     ).success(function (data) {
-      console.log("this is create " + data);
-    });
-  }
-
+        record = null;
+        console.log(data);
+      })
+    };
 }]);;
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -37,7 +37,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/sign_up.html',
     controller: 'mainController'
   })
-  .when('/record/new', {
+  .when('/records/new', {
     templateUrl: 'views/record/new.html',
     controller: 'recordController',
     controllerAs: 'recordCtrl'

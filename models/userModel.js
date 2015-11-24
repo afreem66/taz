@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
       username: {type: String, required: true},
       passwordDigest: {type: String, required: true},
       name: {type: String, required: true},
-      age: {type: Number}
+      age: {type: Number},
       doctor: {type: Boolean, required: true},
       specialty: {type: String},
       hospital: {type: String},
