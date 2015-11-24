@@ -26,10 +26,12 @@ var express = require('express'),
       }
     })
   });
+
   router.get('/all', function (req, res) {
-    Record.find({}), function (err, records) {
+    Record.find({}, function (err, records) {
+      console.log(records);
       res.json(records)
-    }
+    });
   });
 
 module.exports = router;

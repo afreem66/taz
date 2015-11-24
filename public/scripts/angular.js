@@ -8,14 +8,14 @@ app.controller('mainController', function ($scope, $route, $routeParams, $locati
 });
 
 app.controller('recordController', ['$http', '$location', function($http, $location) {
-  var controller = this,
-      record = {
+  var controller = this;
+  var record = {
         bodySystem: "",
         description: "",
         treatment: ""
       }
 
-  $http.get('records/all').success(function (data) {
+  $http.get('/records/all').success(function (data) {
     console.log(data);
     controller.records = data;
   });
