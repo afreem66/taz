@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
     var userSchema = new Schema ({
-      username: {type: String, required: true},
+      email: {type: String, required: true},
       passwordDigest: {type: String, required: true},
       name: {type: String, required: true},
       age: {type: Number},
@@ -12,8 +12,8 @@ var mongoose = require('mongoose'),
       patients: [ {type: Number} ],
       doctors: [ {type: Number} ],
       records: [ {type: Number} ],
-      medications: [ {type: String} ],
-      familyHistory: {type: String, required: true},
+      currentMedications: [ {type: String} ],
+      familyHistory: {type: String},
       height: {type: String, required: true},
       weight: {type: String, required: true},
       pendingRequests: [ {type: Number} ]
