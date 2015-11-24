@@ -8,19 +8,18 @@ app.controller('mainController', function ($scope, $route, $routeParams, $locati
 });
 
 app.controller('recordController', ['$http', '$location', function($http, $location) {
-  var controller = this;
+  var controller = this,
+      record = {
+        bodySystem: "",
+        description: "",
+        treatment: ""
+      }
 
-  var record = {
-    bodySystem: "",
-    description: "",
-    treatment: ""
-  }
-  // $http.get('records').success(function(data){
-  //
-  //   console.log("this is index " + data);
-  //   // controller.records = data;
-  // });
-  console.log(this);
+  $http.get('records').success(function(data){
+    console.log(data);
+    controller.records = data;
+  });
+
   this.create = function(){
     $http.post('/records/new',
       controller.record
@@ -29,8 +28,9 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
         console.log(data);
         console.log($location);
       })
-    };
-}]);;
+  }
+
+}]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
@@ -42,6 +42,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/record/new.html',
     controller: 'recordController',
     controllerAs: 'recordCtrl'
-  }).when('/records/all')
+  }).when('/records/all', {
+    templateUrl: 'views/record/all.html',
+    controller: 'recordController',
+    controllerAs: 'recordCtrl'
+  })
   .otherwise({redirectTo: '/'})
 }]);
