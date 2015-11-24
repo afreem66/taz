@@ -36,10 +36,13 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider.when('/', {
-    templateUrl: 'views/sign_up.html',
+    templateUrl: 'views/welcome.html',
     controller: 'mainController'
-  })
-  .when('/records/new', {
+  }).when('/login', {
+    templateUrl: 'views/login.html',
+    controller: 'mainController',
+    controllerAs: 'mainCtrl'
+  }).when('/records/new', {
     templateUrl: 'views/record/new.html',
     controller: 'recordController',
     controllerAs: 'recordCtrl'

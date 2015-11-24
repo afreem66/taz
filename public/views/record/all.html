@@ -25,7 +25,7 @@
 <table/>
   <li ng-repeat="record in recordCtrl.records">
 
-    <em>{{record.complaint}}</em>
+    <a href="'records/view/' + {{record.id}}"><h4>{{record.complaint}}</h4></a>
     <br/>
     {{record.date}}
     <br/>
