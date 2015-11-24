@@ -1,12 +1,13 @@
 var app = angular.module('TazApp', ['ngRoute']);
 
-app.controller('mainController', function ($scope, $route, $routeParams, $location) {
-  
+app.controller('mainController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
+  var controller = this;
+
+  this.doctor = null;
+  this.name = 'andrew';
   $scope.doctor = null;
-  $scope.$route = $route;
-  $scope.$location = $location;
-  $scope.$routeParams = $routeParams;
-});
+  console.log($scope);
+}]);
 
 app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
@@ -17,7 +18,6 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
         treatment: ""
       }
 
-  console.log($location.path());
   $http.get('/records/all').success(function (data) {
     controller.records = data;
   });
@@ -25,12 +25,18 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
   this.create = function () {
     $http.post('/records/new',
       controller.record
-    ).success(function (data) {
-        controller.records = data;
+    ).then(function(data){
+      console.log(data);
+      if (data) {
         $location.path('/records/all');
-        record = null;
-      });
+      } else {
+        $('body').append('<h2>Sorry, there was an error signing you up--try again!</h2>');
+      }
+    }, function(error){
+      console.log("there was an error: ", error);
+    });
   }
+
 
 }]);
 
@@ -38,7 +44,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $locationProvider.html5Mode(true);
   $routeProvider.when('/', {
     templateUrl: 'views/welcome.html',
-    controller: 'mainController'
+    controller: 'mainController',
+    controllerAs: 'mainCtrl'
   }).when('/login', {
     templateUrl: 'views/login.html',
     controller: 'mainController',

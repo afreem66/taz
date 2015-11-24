@@ -23,13 +23,16 @@ var express = require('express'),
 
     newRecord.save(function (err) {
       if (err) {
-        console.log("There was an error " + err) ;
+        res.json({error: "There was an error: " + err});
+      } else {
+        res.json({record: req.body.description})
       }
     })
   });
 
   router.get('/all', function (req, res) {
     Record.find({}, function (err, records) {
+      console.log(records);
       res.json(records)
     });
   });
