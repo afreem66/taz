@@ -13,6 +13,9 @@ var mongoose = require('mongoose'),
       doctors: [ {type: Number} ],
       records: [ {type: Number} ],
       medications: [ {type: String} ],
+      familyHistory: {type: String, required: true},
+      height: {type: String, required: true},
+      weight: {type: String, required: true},
       pendingRequests: [ {type: Number} ]
     }, {collection: 'user', strict: false});
 
