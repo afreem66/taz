@@ -50,6 +50,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/login.html',
     controller: 'mainController',
     controllerAs: 'mainCtrl'
+  }).when('/users/new', {
+    templateUrl: 'views/user/new.html',
+    controller: 'userController',
+    controllerAs: 'userCtrl'
   }).when('/records/new', {
     templateUrl: 'views/record/new.html',
     controller: 'recordController',
