@@ -15,7 +15,7 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
         treatment: ""
       }
 
-  $http.get('records').success(function(data){
+  $http.get('records/all').success(function (data) {
     console.log(data);
     controller.records = data;
   });

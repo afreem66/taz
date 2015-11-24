@@ -26,5 +26,10 @@ var express = require('express'),
       }
     })
   });
+  router.get('/all', function (req, res) {
+    Record.find({}), function (err, records) {
+      res.json(records)
+    }
+  });
 
 module.exports = router;
