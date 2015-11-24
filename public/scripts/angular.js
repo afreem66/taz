@@ -1,7 +1,8 @@
 var app = angular.module('TazApp', ['ngRoute']);
 
 app.controller('mainController', function ($scope, $route, $routeParams, $location) {
-
+  
+  $scope.doctor = null;
   $scope.$route = $route;
   $scope.$location = $location;
   $scope.$routeParams = $routeParams;
