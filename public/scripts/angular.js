@@ -7,7 +7,7 @@ app.controller('mainController', function ($scope, $route, $routeParams, $locati
   $scope.$routeParams = $routeParams;
 });
 
-app.controller('recordController', ['$http', function($http) {
+app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
 
   var record = {
@@ -27,6 +27,7 @@ app.controller('recordController', ['$http', function($http) {
     ).success(function (data) {
         record = null;
         console.log(data);
+        console.log($location);
       })
     };
 }]);;
@@ -41,5 +42,6 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/record/new.html',
     controller: 'recordController',
     controllerAs: 'recordCtrl'
-  }).otherwise({redirectTo: '/'})
+  }).when('/records/all')
+  .otherwise({redirectTo: '/'})
 }]);
