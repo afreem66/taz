@@ -20,13 +20,12 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
     controller.records = data;
   });
 
-  this.create = function(){
+  this.create = function () {
     $http.post('/records/new',
       controller.record
     ).success(function (data) {
+        $location.path('records/all')
         record = null;
-        console.log(data);
-        console.log($location);
       })
   }
 
