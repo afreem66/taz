@@ -14,6 +14,7 @@ var express = require('express'),
 
   router.post('/new', function (req, res) {
     var newRecord = new Record({
+      comlpaint: req.body.complaint,
       bodySystem : req.body.bodySystem,
       description : req.body.description,
       treatment: req.body.treatment

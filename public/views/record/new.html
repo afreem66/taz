@@ -1,4 +1,10 @@
   <form ng-submit="recordCtrl.create()" class="new-record">
+     <label for="Complaint">Complaint</label>
+     <input type="text"
+           ng-model="recordCtrl.record.complaint"
+           id="complaint"
+           placeholder="What is wrong?">
+     </br>
      <label for="body-system">Body System</label>
      <input type="text"
             ng-model="recordCtrl.record.bodySystem"
@@ -9,7 +15,7 @@
      <input type="text"
             ng-model="recordCtrl.record.description"
             id="description"
-            placeholder="What happened?">
+            placeholder="Further Details?">
      </br>
      <label for="treatment">Treatment</label>
      <input type="text"

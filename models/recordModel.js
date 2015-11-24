@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
     var recordSchema = new Schema ({
       date: {type: Date, default: Date.now},
+      complaint: {type: String, required: true},
       bodySystem: {type: String, required: true},
       description: {type: String, required: true},
       treatment: {type: String, required: true}

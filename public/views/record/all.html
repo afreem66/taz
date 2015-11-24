@@ -24,6 +24,12 @@
   <tbody/>
 <table/>
   <li ng-repeat="record in recordCtrl.records">
-    {{record}}
+    <em>{{record.date}}</em>
+    <br/>
+    {{record.bodySystem}}
+    <br/>
+    {{record.description}}
+    <br/>
+    {{record.treatment}}
   </li>
 </ul>
