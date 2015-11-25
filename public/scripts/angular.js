@@ -16,8 +16,19 @@ app.controller('userController', ['$http', '$location', function($http, $locatio
   }
 
   this.docSignUp = function () {
-    $http.
+    $http.post('/users/new',
+      controller.user
+    ).then(function(data) {
+      if (data) {
+        $location.path('/records/all');
+      } else {
+        $('body').append('<h2>Sorry, there was an error signing up -- try again!</h2>')
+      }
+    }, function (err) {
+      console.log("there was an error: " + err);
+    });
   }
+
 }]);
 app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
@@ -42,8 +53,8 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
       } else {
         $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
       }
-    }, function(error){
-      console.log("there was an error: ", error);
+    }, function(err){
+      console.log("there was an error: " + err);
     });
   }
 
