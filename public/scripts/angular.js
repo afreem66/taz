@@ -8,7 +8,17 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
   $scope.doctor = null;
   console.log($scope);
 }]);
+app.controller('userController', ['$http', '$location', function($http, $location) {
+  var controller = this;
 
+  var user = {
+
+  }
+
+  this.docSignUp = function () {
+    $http.
+  }
+}]);
 app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
   var record = {
@@ -22,7 +32,7 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
     controller.records = data;
   });
 
-  this.create = function () {
+  this.createRecord = function () {
     $http.post('/records/new',
       controller.record
     ).then(function(data){
@@ -30,7 +40,7 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
       if (data) {
         $location.path('/records/all');
       } else {
-        $('body').append('<h2>Sorry, there was an error signing you up--try again!</h2>');
+        $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
       }
     }, function(error){
       console.log("there was an error: ", error);
