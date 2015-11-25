@@ -12,7 +12,21 @@ app.controller('userController', ['$http', '$location', function($http, $locatio
   var controller = this;
 
   var user = {
-
+        email: "",
+        passwordDigest: "",
+        name: "",
+        age: "",
+        doctor: null
+        specialty: "",
+        hospital: "",
+        patients: [],
+        doctors: [],
+        records: [],
+        currentMedications: [],
+        familyHistory: "",
+        height: "",
+        weight: "",
+        pendingRequests: ""
   }
 
   this.docSignUp = function () {
@@ -20,7 +34,7 @@ app.controller('userController', ['$http', '$location', function($http, $locatio
       controller.user
     ).then(function(data) {
       if (data) {
-        $location.path('/records/all');
+        $location.path('/users/all');
       } else {
         $('body').append('<h2>Sorry, there was an error signing up -- try again!</h2>')
       }
@@ -73,6 +87,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controllerAs: 'mainCtrl'
   }).when('/users/new', {
     templateUrl: 'views/user/new.html',
+    controller: 'userController',
+    controllerAs: 'userCtrl'
+  }).when('users./all', {
+    templateUrl: 'views/user/all.html',
     controller: 'userController',
     controllerAs: 'userCtrl'
   }).when('/records/new', {
