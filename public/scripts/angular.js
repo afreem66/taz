@@ -16,7 +16,7 @@ app.controller('userController', ['$http', '$location', function($http, $locatio
         passwordDigest: "",
         name: "",
         age: "",
-        doctor: null
+        doctor: null,
         specialty: "",
         hospital: "",
         patients: [],
