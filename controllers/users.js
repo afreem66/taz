@@ -7,13 +7,13 @@ var express = require('express'),
 
     router.post('/new', function (req, res) {
       var newUser = new User({
-        complaint: req.body.email,
-        bodySystem : req.body.passwordDigest,
-        description : req.body.name,
-        treatment: req.body.age
+        email: req.body.email,
+        password : req.body.passwordDigest,
+        name : req.body.name,
+        age: req.body.age
+
       })
       console.log(newUser);
-
       newUser.save(function (err) {
         if (err) {
           res.json({error: "There was an error: " + err});

@@ -5,10 +5,9 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
 
   this.doctor = null;
   this.name = 'andrew';
-  $scope.doctor = null;
   console.log($scope);
 }]);
-app.controller('userController', ['$http', '$location', function($http, $location) {
+app.controller('userController', ['$http', '$location', '$scope', function($http, $location, $scope) {
   var controller = this;
 
   var user = {
@@ -35,14 +34,15 @@ app.controller('userController', ['$http', '$location', function($http, $locatio
     ).then(function(data) {
       if (data) {
         $location.path('/users/all');
+        console.log(data);
       } else {
         $('body').append('<h2>Sorry, there was an error signing up -- try again!</h2>')
       }
     }, function (err) {
-      console.log("there was an error: " + err);
+      console.log(err);
     });
   }
-
+console.log($scope);
 }]);
 app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
@@ -79,12 +79,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
   $locationProvider.html5Mode(true);
   $routeProvider.when('/', {
     templateUrl: 'views/welcome.html',
-    controller: 'mainController',
-    controllerAs: 'mainCtrl'
+    controller: 'mainController'
   }).when('/login', {
     templateUrl: 'views/login.html',
-    controller: 'mainController',
-    controllerAs: 'mainCtrl'
+    controller: 'mainController'
   }).when('/users/new', {
     templateUrl: 'views/user/new.html',
     controller: 'userController',
