@@ -89,7 +89,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/user/new.html',
     controller: 'userController',
     controllerAs: 'userCtrl'
-  }).when('users./all', {
+  }).when('users/all', {
     templateUrl: 'views/user/all.html',
     controller: 'userController',
     controllerAs: 'userCtrl'

@@ -7,10 +7,10 @@ var express = require('express'),
 
     router.post('/new', function (req, res) {
       var newUser = new User({
-        complaint: req.body.complaint,
-        bodySystem : req.body.bodySystem,
-        description : req.body.description,
-        treatment: req.body.treatment
+        complaint: req.body.email,
+        bodySystem : req.body.passwordDigest,
+        description : req.body.name,
+        treatment: req.body.age
       })
       console.log(newUser);
 
