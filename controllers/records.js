@@ -6,12 +6,6 @@ var express = require('express'),
     User = require('../models/userModel.js');
 
 
-  // server.get('/record/new', function(req, res){
-  //   Record.find({}, function(err, records){
-  //     response.json(records);
-  //   })
-  // });
-
   router.post('/new', function (req, res) {
     var newRecord = new Record({
       complaint: req.body.complaint,
