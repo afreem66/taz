@@ -7,11 +7,12 @@ var express = require('express'),
 
 
     router.use(session({
-      secret: "FUNKE",
+      secret: "phantomphildius",
       resave : true,
       saveUninitialized: true
     }));
-    
+
+
     router.post('/new', function (req, res) {
       var newUser = new User({
         email: req.body.email,
@@ -21,12 +22,15 @@ var express = require('express'),
         doctor: true,
         specialty: req.body.specialty
       })
-      console.log(newUser);
+      console.log("new user" + newUser);
 
-      newUser.save(function (err) {
-        if (err) {
-          res.json({error: "There was an error: " + err});
+      newUser.save(function (saveErr, saveUser) {
+        if (saveErr) {
+          res.json({error: "There was an error: " + saveErr});
         } else {
+          console.log("saved user" + saveUser);
+          req.session.currentUser = saveUser
+          console.log("current user" + req.session.currentUser);
           res.json({user: req.body.name})
         }
       })
