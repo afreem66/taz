@@ -40,6 +40,10 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
         weight: "",
         pendingRequests: ""
   }
+  $scope.occupation = null;
+    $scope.isShown = function(occ) {
+        return occ === $scope.occupation;
+    };
 
   this.docSignUp = function () {
     $http.post('/users/new', {
