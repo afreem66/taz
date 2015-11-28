@@ -15,14 +15,26 @@ var express = require('express'),
 //create user
 
     router.post('/new', function (req, res) {
-      var newUser = new User({
-        email: req.body.email,
-        passwordDigest : req.body.passwordDigest,
-        name : req.body.name,
-        age: req.body.age,
-        doctor: true,
-        specialty: req.body.specialty
-      })
+      User.findOne({ email : req.body.email},
+      function (err, user) {
+        if (err) {
+          console.log(err);
+          res.json({error: "there was a login error: " + err})
+        } else if (user) {
+          console.log("this user already exists: " + user);
+          res.json({error: "there was an user error: " + user})
+        } else {
+          bcrypt.genSalt(10, function (saltErr, salt) {
+            bcrypt.hash(req.body.password,
+            salt, function(hashErr, hash) {
+          var newUser = new User({
+            email: req.body.email,
+            passwordDigest : req.body.passwordDigest,
+            name : req.body.name,
+            age: req.body.age,
+            doctor: true,
+            specialty: req.body.specialty
+          })
       console.log("new user" + newUser);
 
       newUser.save(function (saveErr, saveUser) {
@@ -32,7 +44,7 @@ var express = require('express'),
           console.log("saved user" + saveUser);
           req.session.currentUser = saveUser
           console.log("current user" + req.session.currentUser);
-          res.json({user: req.body.name})
+          res.json({user: saveUser})
         }
       })
     });
