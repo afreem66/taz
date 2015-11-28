@@ -20,7 +20,7 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
   this.name = 'andrew';
   console.log($scope);
 }]);
-app.controller('userController', ['$http', '$location', '$scope', function($http, $location, $scope) {
+app.controller('userController', ['$http', '$location', '$scope', 'userService', function($http, $location, $scope, userService) {
   var controller = this;
 
   var user = {
@@ -42,10 +42,14 @@ app.controller('userController', ['$http', '$location', '$scope', function($http
   }
 
   this.docSignUp = function () {
-    $http.post('/users/new',
-      controller.currentUser
-    ).then(function(data) {
-      if (data) {
+    $http.post('/users/new', {
+      email: controller.user.email,
+      passwordDigest: controller.user.passwordDigest,
+      name: controller.user.name,
+      specialty: controller.user.specialty,
+      hospital: controller.user.hospital
+    }).then(function(data) {
+      if (!data.data.error) {
         $location.path('/users/all');
         console.log(data);
       } else {
@@ -55,17 +59,18 @@ app.controller('userController', ['$http', '$location', '$scope', function($http
       console.log(err);
     });
   }
-
+console.log(this);
   this.login = function () {
-    $http.post('/login', {
+    $http.post('/users/login', {
       email: controller.user.email,
-      passwordDigest: controller.currentUser.passwordDigest
+      passwordDigest: controller.user.passwordDigest
     }).then(function(data) {
       if (data.data.user) {
         userService.setUser(data.data.user)
+        console.log(userService.getUser());
         $location.path('/users/all')
       } else {
-        $('body').append('<h2>Sorry, there was an error logging in -- try again!</h2>')
+        console.log(data);
       }
     }, function (err) {
       console.log(err);
@@ -110,7 +115,7 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/welcome.html',
     controller: 'mainController',
     controllerAs: 'mainCtrl'
-  }).when('/login', {
+  }).when('/users/login', {
     templateUrl: 'views/login.html',
     controller: 'userController',
     controllerAs: 'userCtrl'

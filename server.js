@@ -9,7 +9,8 @@ var express = require('express'),
     morgan = require('morgan'),
     session = require('express-session'),
     bcrypt = require('bcryptjs'),
-    Record = require('./models/recordModel.js')
+    Record = require('./models/recordModel.js'),
+    User = require('./models/userModel.js');
 
 server.use(express.static('./public'));
 

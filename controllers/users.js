@@ -31,7 +31,7 @@ var express = require('express'),
               console.log(hash);
           var newUser = new User({
             email: req.body.email,
-            passwordDigest : hash,
+            passwordDigest : req.body.passwordDigest,
             name : req.body.name,
             age: req.body.age,
             doctor: true,
@@ -60,22 +60,31 @@ var express = require('express'),
 
 router.post('/login', function(req, res) {
   User.findOne({email : req.body.email}, function(loginErr, user) {
-    if (err) {
-          console.log(loginErr);
-      } else if (user) {
-        bcrypt.compare(req.body.passwordDigest, user.passwordDigest, function (compareErr, match) {
-          if (match) {
-            req.session.currentUser = user;
-            res.json({user: user})
-          } else {
-            console.log("Username and password combo is not a match");
-            res.json({error: "there was a login error: " + loginErr});
-          }
-        });
-      } else {
-        console.log("something bad happened");
-        res.redirect(302, '/');
-      }
+
+    if (user && user.passwordDigest === req.body.passwordDigest) {
+      req.session.currentUser = user;
+      res.json({user: user})
+    } else {
+      console.log("There was a login error" + loginErr);
+      res.json({error: "there was a login error: " + loginErr})
+    }
+    // if (loginErr) {
+    //       res.json({error: "there was a login error: " + loginErr})
+    //       console.log(loginErr);
+    //   } else if (user) {
+    //     bcrypt.compare(req.body.passwordDigest, user.passwordDigest, function (compareErr, match) {
+    //       if (match) {
+    //         req.session.currentUser = user;
+    //         res.json({user: user})
+    //       } else {
+    //         console.log("Username and password combo is not a match");
+    //         res.json({error: "there was a compare error: " + compareErr});
+    //       }
+    //     });
+    //   } else {
+    //     console.log("something bad happened");
+    //     res.json({error: "there was a catastrophic error" + loginErr});
+    //   }
   });
 });
 
