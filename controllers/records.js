@@ -8,6 +8,7 @@ var express = require('express'),
 
   router.post('/new', function (req, res) {
     var newRecord = new Record({
+      author: req.session.currentUser.name,
       complaint: req.body.complaint,
       bodySystem : req.body.bodySystem,
       description : req.body.description,

@@ -1,4 +1,4 @@
-var app = angular.module('TazApp', ['ngRoute']);
+var app = angular.module('TazApp', ['ngRoute','vAccordion']);
 
 app.service('userService', function() {
   var controller = this;

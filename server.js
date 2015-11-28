@@ -9,6 +9,7 @@ var express = require('express'),
     morgan = require('morgan'),
     session = require('express-session'),
     bcrypt = require('bcryptjs'),
+    // accordion = require('v-accordion')
     Record = require('./models/recordModel.js'),
     User = require('./models/userModel.js');
 

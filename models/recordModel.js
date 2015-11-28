@@ -2,7 +2,8 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
     var recordSchema = new Schema ({
-      date: {type: Date, default: Date.now},
+      author: {type: String, required: true},
+      date: {type: Date, required: true},
       complaint: {type: String, required: true},
       bodySystem: {type: String, required: true},
       description: {type: String, required: true},
