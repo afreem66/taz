@@ -1,5 +1,5 @@
 <h1>taz</h1>
-<v-accordion class="vAccordion--default" multiple>
+<v-accordion class="vAccordion--default">
   <v-pane expanded>
     <v-pane-header>
       log in
@@ -14,6 +14,9 @@
   </v-pane>
   <v-pane>
     <v-pane-header>
+      create a new user
+    </v-pane-header>
+    <v-pane-content>
       <form class="new-doc" ng-submit="userCtrl.docSignUp()">
         <label for="email">Email</label>
         <input type="email"
@@ -33,6 +36,19 @@
                id="name"
                placeholder="First and Last Name">
         </br>
+        <label for="Patient or Doctor?">Doctor or Patient?</label>
+        <label for="Doctor">Doctor</label>
+        <input type="radio"
+               name="Doctor"
+               ng-model="userCtrl.user.doctor"
+               id="Doctor"
+               value="true">
+       <label for="Patient">Patient</label>
+        <input type="radio"
+               name="Patient"
+               ng-model="userCtrl.user.doctor"
+               id="Patient"
+               value="false">
         <label for="specialty">Speciality</label>
         <input type="text"
                ng-model="userCtrl.user.specialty"
@@ -98,5 +114,6 @@
         </br>
         <input type="submit" value="Create">
       </form>
-    </v-pane-header>
+    </v-pane-content>
+
 </v-accordion>
