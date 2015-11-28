@@ -1,6 +1,7 @@
 var express = require('express'),
     router = express.Router(),
     session = require('express-session'),
+    bcrypt = require('bcryptjs'),
     mongoose = require('mongoose'),
     Record = require('../models/recordModel.js'),
     User = require('../models/userModel.js');
@@ -25,11 +26,12 @@ var express = require('express'),
           res.json({error: "there was an user error: " + user})
         } else {
           bcrypt.genSalt(10, function (saltErr, salt) {
-            bcrypt.hash(req.body.password,
+            bcrypt.hash(req.body.passwordDigest,
             salt, function(hashErr, hash) {
+              console.log(hash);
           var newUser = new User({
             email: req.body.email,
-            passwordDigest : req.body.passwordDigest,
+            passwordDigest : hash,
             name : req.body.name,
             age: req.body.age,
             doctor: true,
@@ -46,8 +48,12 @@ var express = require('express'),
           console.log("current user" + req.session.currentUser);
           res.json({user: saveUser})
         }
-      })
+      });
+          });
+        });
+      };
     });
+  });
 
 // login
 
@@ -72,11 +78,11 @@ router.get('/login', function(req, res) {
   });
 });
 
-    router.get('/all', function (req, res) {
-      User.find({}, function (err, users) {
-        console.log(users);
-        res.json(users)
-      });
+  router.get('/all', function (req, res) {
+    User.find({}, function (err, users) {
+      console.log(users);
+      res.json(users)
     });
+  });
 
 module.exports = router;
