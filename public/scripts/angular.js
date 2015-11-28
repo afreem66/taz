@@ -1,5 +1,18 @@
 var app = angular.module('TazApp', ['ngRoute']);
 
+app.service('userService', function() {
+  var controller = this;
+
+  this.setUser = function(user) {
+    controller.currentUser = user;
+  }
+
+  this.getUser = function() {
+    return controller.currentUser;
+  }
+  
+});
+
 app.controller('mainController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
   var controller = this;
 
