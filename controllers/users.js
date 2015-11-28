@@ -12,6 +12,7 @@ var express = require('express'),
       saveUninitialized: true
     }));
 
+//create user
 
     router.post('/new', function (req, res) {
       var newUser = new User({
@@ -35,6 +36,29 @@ var express = require('express'),
         }
       })
     });
+
+// login
+
+router.get('/login', function(req, res) {
+  User.findOne({email : req.body.email}, function(loginErr, user) {
+    if (err) {
+          console.log(loginErr);
+      } else if (user) {
+        bcrypt.compare(req.body.password, user.passwordDigest, function (compareErr, match) {
+          if (match) {
+            req.session.currentUser = user;
+            res.json({user: user})
+          } else {
+            console.log("Username and password combo is not a match");
+            res.json({error: "there was a login error: " + loginErr});
+          }
+        });
+      } else {
+        console.log("something bad happened");
+        res.redirect(302, '/');
+      }
+  });
+});
 
     router.get('/all', function (req, res) {
       User.find({}, function (err, users) {
