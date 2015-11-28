@@ -10,7 +10,7 @@ app.service('userService', function() {
   this.getUser = function() {
     return controller.currentUser;
   }
-  
+
 });
 
 app.controller('mainController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
@@ -23,27 +23,27 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
 app.controller('userController', ['$http', '$location', '$scope', function($http, $location, $scope) {
   var controller = this;
 
-  var user = {
-        email: "",
-        passwordDigest: "",
-        name: "",
-        age: "",
-        doctor: null,
-        specialty: "",
-        hospital: "",
-        patients: [],
-        doctors: [],
-        records: [],
-        currentMedications: [],
-        familyHistory: "",
-        height: "",
-        weight: "",
-        pendingRequests: ""
-  }
+  // var user = {
+  //       email: "",
+  //       passwordDigest: "",
+  //       name: "",
+  //       age: "",
+  //       doctor: null,
+  //       specialty: "",
+  //       hospital: "",
+  //       patients: [],
+  //       doctors: [],
+  //       records: [],
+  //       currentMedications: [],
+  //       familyHistory: "",
+  //       height: "",
+  //       weight: "",
+  //       pendingRequests: ""
+  // }
 
   this.docSignUp = function () {
     $http.post('/users/new',
-      controller.user
+      controller.currentUser
     ).then(function(data) {
       if (data) {
         $location.path('/users/all');
@@ -55,7 +55,23 @@ app.controller('userController', ['$http', '$location', '$scope', function($http
       console.log(err);
     });
   }
-console.log($scope);
+
+  this.login = function () {
+    $http.post('/login', {
+      email: controller.currentUser.email,
+      passwordDigest: controller.currentUser.passwordDigest
+    }).then(function(data) {
+      if (data.data.user) {
+        userService.setUser(data.data.user)
+        $location.path('/users/all')
+      } else {
+        $('body').append('<h2>Sorry, there was an error logging in -- try again!</h2>')
+      }
+    }, function (err) {
+      console.log(err);
+    })
+  }
+
 }]);
 app.controller('recordController', ['$http', '$location', function($http, $location) {
   var controller = this;
@@ -96,8 +112,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controllerAs: 'mainCtrl'
   }).when('/login', {
     templateUrl: 'views/login.html',
-    controller: 'mainController',
-    controllerAs: 'mainCtrl'
+    controller: 'userController',
+    controllerAs: 'userCtrl'
   }).when('/users/new', {
     templateUrl: 'views/user/new.html',
     controller: 'userController',

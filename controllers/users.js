@@ -35,7 +35,8 @@ var express = require('express'),
             name : req.body.name,
             age: req.body.age,
             doctor: true,
-            specialty: req.body.specialty
+            specialty: req.body.specialty,
+            hospital: req.body.hospital
           })
       console.log("new user" + newUser);
 
@@ -46,7 +47,7 @@ var express = require('express'),
           console.log("saved user" + saveUser);
           req.session.currentUser = saveUser
           console.log("current user" + req.session.currentUser);
-          res.json({user: saveUser})
+          res.json({currentUser: saveUser})
         }
       });
           });
@@ -57,12 +58,12 @@ var express = require('express'),
 
 // login
 
-router.get('/login', function(req, res) {
+router.post('/login', function(req, res) {
   User.findOne({email : req.body.email}, function(loginErr, user) {
     if (err) {
           console.log(loginErr);
       } else if (user) {
-        bcrypt.compare(req.body.password, user.passwordDigest, function (compareErr, match) {
+        bcrypt.compare(req.body.passwordDigest, user.passwordDigest, function (compareErr, match) {
           if (match) {
             req.session.currentUser = user;
             res.json({user: user})
