@@ -1,3 +1,10 @@
+body {
+  text-align: center;
+}
+
+v-accordion {
+margin: 10%, auto;
+}
 h1 {
   color: red;
   background: black;

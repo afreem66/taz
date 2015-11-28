@@ -1,12 +1,9 @@
 <h1>taz</h1>
 <v-accordion class="vAccordion--default" multiple>
-
-  <!-- add expanded attribute to open the section -->
   <v-pane expanded>
     <v-pane-header>
       log in
     </v-pane-header>
-
     <v-pane-content>
       <form class="login" ng-submit=userCtrl.login()>
         <input type="text" ng-model="userCtrl.user.email" placeholder="email">
@@ -15,24 +12,91 @@
       </form>
     </v-pane-content>
   </v-pane>
-
   <v-pane>
     <v-pane-header>
-      Pane header #2
+      <form class="new-doc" ng-submit="userCtrl.docSignUp()">
+        <label for="email">Email</label>
+        <input type="email"
+               ng-model="userCtrl.user.email"
+               id="email"
+               placeholder="Your Email">
+        </br>
+        <label for="password">Password</label>
+        <input type="password"
+               ng-model="userCtrl.user.passwordDigest"
+               id="password"
+               placeholder="Enter a Password">
+        </br>
+        <label for="name">Name</label>
+        <input type="text"
+               ng-model="userCtrl.user.name"
+               id="name"
+               placeholder="First and Last Name">
+        </br>
+        <label for="specialty">Speciality</label>
+        <input type="text"
+               ng-model="userCtrl.user.specialty"
+               id="specialty"
+               placeholder="What type of doctor are you?">
+        </br>
+        <label for="hospital">Hospital</label>
+        <input type="text"
+               ng-model="userCtrl.user.hospital"
+               id="hospital"
+               placeholder="Where do you practice?">
+        </br>
+        <input type="submit" value="Create">
+      </form>
+      <form class="new-patient" ng-submit="">
+        <label for="email">Email</label>
+        <input type="email"
+               ng-model="userCtrl.user.email"
+               id="email"
+               placeholder="Your Email">
+        </br>
+        <label for="password">Password</label>
+        <input type="password"
+               ng-model="userCtrl.user.passwordDigest"
+               id="password"
+               placeholder="Enter a Password">
+        </br>
+        <label for="name">Name</label>
+        <input type="text"
+               ng-model="userCtrl.user.name"
+               id="name"
+               placeholder="First and Last Name">
+        </br>
+        <label for="age">Age</label>
+        <input type="number"
+               ng-model="userCtrl.user.age"
+               id="age"
+               placeholder="How old are you?">
+        </br>
+        <label for="height">Height</label>
+        <input type="text"
+               ng-model="userCtrl.user.height"
+               id="height"
+               placeholder="How tall are you?">
+        </br>
+        <label for="weight">Weight</label>
+        <input type="number"
+               ng-model="userCtrl.user.weight"
+               id="weight"
+               placeholder="How much do you weigh?">
+        </br>
+        <label for="familyHistory">Family Medical History</label>
+        <input type="text"
+               ng-model="userCtrl.user.familyHistory"
+               id="familyHistory"
+               placeholder="Any inherited medical conditions?">
+        </br>
+        <label for="currentMedications">Current Medications</label>
+        <input type="text"
+               ng-model="userCtrl.user.currentMedications"
+               id="currentMedications"
+               placeholder="Are you currently taking medication?">
+        </br>
+        <input type="submit" value="Create">
+      </form>
     </v-pane-header>
-
-    <v-pane-content>
-      Pane content #2
-    </v-pane-content>
-  </v-pane>
-  <v-pane>
-    <v-pane-header>
-      Pane header #3
-    </v-pane-header>
-
-    <v-pane-content>
-      Pane content #3
-    </v-pane-content>
-  </v-pane>
-
 </v-accordion>
