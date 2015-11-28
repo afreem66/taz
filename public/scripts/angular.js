@@ -23,23 +23,23 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
 app.controller('userController', ['$http', '$location', '$scope', function($http, $location, $scope) {
   var controller = this;
 
-  // var user = {
-  //       email: "",
-  //       passwordDigest: "",
-  //       name: "",
-  //       age: "",
-  //       doctor: null,
-  //       specialty: "",
-  //       hospital: "",
-  //       patients: [],
-  //       doctors: [],
-  //       records: [],
-  //       currentMedications: [],
-  //       familyHistory: "",
-  //       height: "",
-  //       weight: "",
-  //       pendingRequests: ""
-  // }
+  var user = {
+        email: "",
+        passwordDigest: "",
+        name: "",
+        age: "",
+        doctor: null,
+        specialty: "",
+        hospital: "",
+        patients: [],
+        doctors: [],
+        records: [],
+        currentMedications: [],
+        familyHistory: "",
+        height: "",
+        weight: "",
+        pendingRequests: ""
+  }
 
   this.docSignUp = function () {
     $http.post('/users/new',
@@ -58,7 +58,7 @@ app.controller('userController', ['$http', '$location', '$scope', function($http
 
   this.login = function () {
     $http.post('/login', {
-      email: controller.currentUser.email,
+      email: controller.user.email,
       passwordDigest: controller.currentUser.passwordDigest
     }).then(function(data) {
       if (data.data.user) {

@@ -1,6 +1,6 @@
 <form class="login" ng-submit=userCtrl.login()>
-  <input type="text" name="name" value="" placeholder="username">
-  <input type="password" name="name" value="" placeholder="password">
+  <input type="text" ng-model="userCtrl.user.email" placeholder="email">
+  <input type="password" ng-model="userCtrl.user.passwordDigest" placeholder="password">
   <input type="submit" value="Login">
   <br/>
   <a class="button" href='/users/new'>Create new User</a>
