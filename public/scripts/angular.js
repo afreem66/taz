@@ -46,6 +46,7 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
       email: controller.user.email,
       passwordDigest: controller.user.passwordDigest,
       name: controller.user.name,
+      doctor: controller.user.doctor,
       specialty: controller.user.specialty,
       hospital: controller.user.hospital
     }).then(function(data) {
@@ -53,7 +54,7 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
         $location.path('/users/all');
         console.log(data);
       } else {
-        $('body').append('<h2>Sorry, there was an error signing up -- try again!</h2>')
+        console.log(data.data);
       }
     }, function (err) {
       console.log(err);

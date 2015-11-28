@@ -34,7 +34,7 @@ var express = require('express'),
             passwordDigest : req.body.passwordDigest,
             name : req.body.name,
             age: req.body.age,
-            doctor: true,
+            doctor: req.body.doctor,
             specialty: req.body.specialty,
             hospital: req.body.hospital
           })
