@@ -112,9 +112,9 @@ app.controller('recordController', ['$http', '$location', function($http, $locat
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider.when('/', {
-    templateUrl: 'views/welcome.html',
-    controller: 'mainController',
-    controllerAs: 'mainCtrl'
+    templateUrl: 'views/login.html',
+    controller: 'userController',
+    controllerAs: 'userCtrl'
   }).when('/users/login', {
     templateUrl: 'views/login.html',
     controller: 'userController',

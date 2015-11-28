@@ -1,8 +1,38 @@
-<form class="login" ng-submit=userCtrl.login()>
-  <input type="text" ng-model="userCtrl.user.email" placeholder="email">
-  <input type="password" ng-model="userCtrl.user.passwordDigest" placeholder="password">
-  <input type="submit" value="Login">
-  <br/>
-  <a class="button" href='/users/new'>Create new User</a>
-</form>
-<a href="/records/new">new</a>
+<h1>taz</h1>
+<v-accordion class="vAccordion--default" multiple>
+
+  <!-- add expanded attribute to open the section -->
+  <v-pane expanded>
+    <v-pane-header>
+      log in
+    </v-pane-header>
+
+    <v-pane-content>
+      <form class="login" ng-submit=userCtrl.login()>
+        <input type="text" ng-model="userCtrl.user.email" placeholder="email">
+        <input type="password" ng-model="userCtrl.user.passwordDigest" placeholder="password">
+        <input type="submit" value="Login">
+      </form>
+    </v-pane-content>
+  </v-pane>
+
+  <v-pane>
+    <v-pane-header>
+      Pane header #2
+    </v-pane-header>
+
+    <v-pane-content>
+      Pane content #2
+    </v-pane-content>
+  </v-pane>
+  <v-pane>
+    <v-pane-header>
+      Pane header #3
+    </v-pane-header>
+
+    <v-pane-content>
+      Pane content #3
+    </v-pane-content>
+  </v-pane>
+
+</v-accordion>
