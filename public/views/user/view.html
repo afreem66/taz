@@ -1,5 +1,5 @@
 <h1>{{userCtrl.currentUser.name}}</h1>
-<table class="u-full-width" ng-show="userCtrl.user.doctor == 'false'">
+<table class="u-full-width" ng-show="userCtrl.currentUser.doctor == false">
   <thead>
     <tr>
       <th>Age</th>
@@ -13,17 +13,17 @@
   </thead>
   <tbody>
     <tr>
-      <td>{{userCtrl.user.age}}</td>
-      <td>{{userCtrl.user.gender}}</td>
-      <td>{{userCtrl.user.height}}</td>
-      <td>{{userCtrl.user.weight}}</td>
-      <td>{{userCtrl.user.bloodPressure}}</td>
-      <td>{{userCtrl.user.currentMedications}}</td>
-      <td>{{userCtrl.user.familyHistory}}</td>
+      <td>{{userCtrl.currentUser.age}}</td>
+      <td>{{userCtrl.currentUser.gender}}</td>
+      <td>{{userCtrl.currentUser.height}}</td>
+      <td>{{userCtrl.currentUser.weight}}</td>
+      <td>{{userCtrl.currentUser.bloodPressure}}</td>
+      <td>{{userCtrl.currentUser.currentMedications}}</td>
+      <td>{{userCtrl.currentUser.familyHistory}}</td>
     </tr>
   <tbody/>
 <table/>
-<table class="u-full-width" ng-show="userCtrl.user.doctor == 'true'">
+<table class="u-full-width" ng-show="userCtrl.currentUser.doctor == true">
   <thead>
     <tr>
       <th>Age</th>
@@ -64,3 +64,4 @@
     </v-pane-content>
   </v-pane>
 </v-accordion>
+{{userCtrl}}

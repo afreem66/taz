@@ -32,10 +32,6 @@ server.use(function (req, res, next) {
   next();
 })
 
-// server.use('/', function (req, res) {
-//   res.render('views/index.html')
-// })
-
 var recordController = require('./controllers/records.js');
 server.use('/records', recordController);
 

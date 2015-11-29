@@ -20,7 +20,8 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
 
 app.controller('userController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
-
+  controller.currentUser = userService.getUser()
+  console.log(controller.currentUser);
   this.docSignUp = function () {
     $http.post('/users/new', {
       email: controller.user.email,
@@ -56,11 +57,12 @@ app.controller('userController', ['$http', '$location', 'userService', function(
       passwordDigest: controller.user.passwordDigest
     }).then(function(data) {
       if (!data.data.error) {
+        console.log(data.data.user);
         userService.setUser(data.data.user)
-        console.log(userService.getUser());
         console.log(controller.user);
+
         $location.path('/users/' + userService.getUser()._id + '/view')
-        console.log(controller);
+        console.log(controller.currentUser);
       } else {
         console.log(data);
       }
@@ -69,6 +71,7 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     })
   }
 }]);
+
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
   var record = {
@@ -113,8 +116,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controllerAs: 'userCtrl'
   }).when('/users/:id/view', {
     templateUrl: 'views/user/view.html',
-    controller: 'userController'
-    // controllerAs: 'userCtrl'
+    controller: 'userController',
+    controllerAs: 'userCtrl'
   }).when('/users/all', {
     templateUrl: 'views/user/all.html',
     controller: 'userController',
