@@ -1,4 +1,9 @@
   <form ng-submit="recordCtrl.createRecord()" class="new-record">
+     <label for="date">Date</label>
+     <input type="date"
+            ng-model="recordCtrl.record.date"
+            id="date"
+            placeholder="When did it happen?">
      <label for="complaint">Complaint</label>
      <input type="text"
             ng-model="recordCtrl.record.complaint"

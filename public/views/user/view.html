@@ -23,3 +23,14 @@
     </tr>
   <tbody/>
 <table/>
+
+<v-accordion>
+  <v-pane ng-repeat="record in userCtrl.currentUser.records">
+    <v-pane-header>
+      {{record.complaint}} -- {{record.date}}
+    </v-pane-header>
+    <v-pane-content>
+      
+    </v-pane-content>
+  </v-pane>
+</v-accordion>

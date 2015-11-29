@@ -7,9 +7,8 @@ var mongoose = require('mongoose'),
       complaint: {type: String, required: true},
       bodySystem: {type: String, required: true},
       description: {type: String, required: true},
-      treatment: {type: String, required: true}
-      // author: {type: String, required: true},
-      // patient: {type: String, required: true}
+      treatment: {type: String, required: true},
+      patient: {type: String}
     }, {collection: 'record', strict: false});
 
     var Record = mongoose.model('Record', recordSchema);
