@@ -13,6 +13,12 @@ var express = require('express'),
     Record = require('./models/recordModel.js'),
     User = require('./models/userModel.js');
 
+server.use(session({
+  secret: "phantomphildius",
+  resave : true,
+  saveUninitialized: true
+}));
+
 server.use(express.static('./public'));
 
 server.use(methodOverride('_method'));
@@ -20,6 +26,15 @@ server.use(methodOverride('_method'));
 server.use(bodyParser.json());
 
 server.use(morgan('dev'));
+
+server.use(function (req, res, next) {
+  res.locals.user = req.session.currentUser;
+  next();
+})
+
+// server.use('/', function (req, res) {
+//   res.render('views/index.html')
+// })
 
 var recordController = require('./controllers/records.js');
 server.use('/records', recordController);

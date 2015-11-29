@@ -39,7 +39,7 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     }).then(function(data) {
       if (!data.data.error) {
         console.log(data.data);
-        userService.setUser(data.data)
+        userService.setUser(data.data.user)
         $location.path('/users/' + userService.getUser()._id + '/view');
         console.log(data);
       } else {
@@ -57,8 +57,8 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     }).then(function(data) {
       if (!data.data.error) {
         userService.setUser(data.data.user)
-        controller.user = userService.getUser()
         console.log(userService.getUser());
+        console.log(controller.user);
         $location.path('/users/' + userService.getUser()._id + '/view')
         console.log(controller);
       } else {
@@ -68,8 +68,6 @@ app.controller('userController', ['$http', '$location', 'userService', function(
       console.log(err);
     })
   }
-  console.log(userService.getUser());
-
 }]);
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
@@ -78,7 +76,7 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
         bodySystem: "",
         description: "",
         treatment: "",
-        author: this.userService.getUser().name
+        author: userService.getUser().name
       }
 
   $http.get('/records/all').success(function (data) {
@@ -115,8 +113,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controllerAs: 'userCtrl'
   }).when('/users/:id/view', {
     templateUrl: 'views/user/view.html',
-    controller: 'userController',
-    controllerAs: 'userCtrl'
+    controller: 'userController'
+    // controllerAs: 'userCtrl'
   }).when('/users/all', {
     templateUrl: 'views/user/all.html',
     controller: 'userController',

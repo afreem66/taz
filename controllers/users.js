@@ -48,7 +48,7 @@ var express = require('express'),
 
       newUser.save(function (saveErr, saveUser) {
         if (saveErr) {
-          res.json({error: "There was an error: " + saveErr});
+          res.json({error: "There was a save error: " + saveErr});
         } else {
           console.log("saved user" + saveUser);
           req.session.currentUser = saveUser

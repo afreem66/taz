@@ -12,7 +12,8 @@ var express = require('express'),
       complaint: req.body.complaint,
       bodySystem : req.body.bodySystem,
       description : req.body.description,
-      treatment: req.body.treatment
+      treatment: req.body.treatment,
+      date: req.body.date
     })
     console.log(newRecord);
 
