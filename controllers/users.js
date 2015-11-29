@@ -34,9 +34,15 @@ var express = require('express'),
             passwordDigest : req.body.passwordDigest,
             name : req.body.name,
             age: req.body.age,
+            gender: req.body.gender,
             doctor: req.body.doctor,
             specialty: req.body.specialty,
-            hospital: req.body.hospital
+            hospital: req.body.hospital,
+            currentMedications: req.body.currentMedications,
+            familyHistory: req.body.familyHistory,
+            height: req.body.height,
+            weight: req.body.weight,
+            bloodPressure: req.body.bloodPressure
           })
       console.log("new user" + newUser);
 

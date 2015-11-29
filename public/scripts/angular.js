@@ -16,10 +16,8 @@ app.service('userService', function() {
 app.controller('mainController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
   var controller = this;
 
-  this.doctor = null;
-  this.name = 'andrew';
-  console.log($scope);
 }]);
+
 app.controller('userController', ['$http', '$location', '$scope', 'userService', function($http, $location, $scope, userService) {
   var controller = this;
 
@@ -40,10 +38,6 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
         weight: "",
         pendingRequests: ""
   }
-  $scope.occupation = null;
-    $scope.isShown = function(occ) {
-        return occ === $scope.occupation;
-    };
 
   this.docSignUp = function () {
     $http.post('/users/new', {
@@ -52,9 +46,17 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
       name: controller.user.name,
       doctor: controller.user.doctor,
       specialty: controller.user.specialty,
-      hospital: controller.user.hospital
+      hospital: controller.user.hospital,
+      age: controller.user.age,
+      gender: controller.user.gender,
+      currentMedications: controller.user.currentMedications,
+      familyHistory: controller.user.familyHistory,
+      height: controller.user.height,
+      weight: controller.user.weight,
+      bloodPressure: controller.user.bloodPressure
     }).then(function(data) {
       if (!data.data.error) {
+        userService.setUser(data.data.user)
         $location.path('/users/all');
         console.log(data);
       } else {
@@ -64,7 +66,7 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
       console.log(err);
     });
   }
-console.log(this);
+
   this.login = function () {
     $http.post('/users/login', {
       email: controller.user.email,
@@ -73,6 +75,7 @@ console.log(this);
       if (data.data.user) {
         userService.setUser(data.data.user)
         console.log(userService.getUser());
+        console.log(controller);
         $location.path('/users/all')
       } else {
         console.log(data);
