@@ -74,25 +74,25 @@ app.controller('userController', ['$http', '$location', 'userService', function(
 
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
-  var record = {
-        complaint: "",
-        bodySystem: "",
-        description: "",
-        treatment: "",
-        author: userService.getUser().name
-      }
-
+  
   $http.get('/records/all').success(function (data) {
     controller.records = data;
   });
 
   this.createRecord = function () {
-    $http.post('/records/new',
-      controller.record
-    ).then(function(data){
+    $http.post('/records/new', {
+    complaint: controller.record.complaint,
+    bodySystem: controller.record.bodySystem,
+    description: controller.record.description,
+    treatment: controller.record.treatment,
+    author: userService.getUser().name,
+    date: controller.record.date
+    }).then(function(data){
       console.log(data);
       if (data) {
-        $location.path('/records/all');
+        console.log(data);
+        // userService.getUser().push
+        $location.path('/users/' + userService.getUser()._id + '/view');
       } else {
         $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
       }

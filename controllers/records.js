@@ -17,11 +17,11 @@ var express = require('express'),
     })
     console.log(newRecord);
 
-    newRecord.save(function (err) {
+    newRecord.save(function (err, saveRecord) {
       if (err) {
         res.json({error: "There was an error: " + err});
       } else {
-        res.json({record: req.body.description})
+        res.json({record: saveRecord})
       }
     })
   });

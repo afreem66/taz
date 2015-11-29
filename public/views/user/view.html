@@ -26,28 +26,18 @@
 <table class="u-full-width" ng-show="userCtrl.currentUser.doctor == true">
   <thead>
     <tr>
-      <th>Age</th>
-      <th>Gender</th>
-      <th>Height</th>
-      <th>Weight</th>
-      <th>Blood Pressure</th>
-      <th>Medications</th>
-      <th>Family History</th>
+      <th>Hospital</th>
+      <th>Sepcialty</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>{{userCtrl.currentUser.age}}</td>
-      <td>{{userCtrl.currentUser.gender}}</td>
-      <td>{{userCtrl.currentUser.height}}</td>
-      <td>{{userCtrl.currentUser.weight}}</td>
-      <td>{{userCtrl.currentUser.bloodPressure}}</td>
-      <td>{{userCtrl.currentUser.currentMedications}}</td>
-      <td>{{userCtrl.currentUser.familyHistory}}</td>
+      <td>{{userCtrl.currentUser.hospital}}</td>
+      <td>{{userCtrl.currentUser.specialty}}</td>
     </tr>
   <tbody/>
 <table/>
-<v-accordion>
+<v-accordion ng-show="userCtrl.currentUser.doctor == false">
   <v-pane ng-repeat="record in userCtrl.currentUser.records">
     <v-pane-header>
       {{record.complaint}} -- {{record.date}}
@@ -57,11 +47,7 @@
   </v-pane>
   <v-pane>
     <v-pane-header>
-      Add a new record
-    </v-pane-header>
-    <v-pane-content>
       <a href="/records/new">new record</a>
-    </v-pane-content>
+    </v-pane-header>
   </v-pane>
 </v-accordion>
-{{userCtrl}}
