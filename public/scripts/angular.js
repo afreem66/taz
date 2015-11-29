@@ -18,7 +18,7 @@ app.controller('mainController', ['$scope', '$route', '$routeParams', '$location
 
 }]);
 
-app.controller('userController', ['$http', '$location', '$scope', 'userService', function($http, $location, $scope, userService) {
+app.controller('userController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
 
   this.docSignUp = function () {
@@ -38,7 +38,8 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
       bloodPressure: controller.user.bloodPressure
     }).then(function(data) {
       if (!data.data.error) {
-        userService.setUser(data.data.user)
+        console.log(data.data);
+        userService.setUser(data.data)
         $location.path('/users/' + userService.getUser()._id + '/view');
         console.log(data);
       } else {
@@ -54,10 +55,12 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
       email: controller.user.email,
       passwordDigest: controller.user.passwordDigest
     }).then(function(data) {
-      if (data.data.user) {
+      if (!data.data.error) {
         userService.setUser(data.data.user)
+        controller.user = userService.getUser()
         console.log(userService.getUser());
         $location.path('/users/' + userService.getUser()._id + '/view')
+        console.log(controller);
       } else {
         console.log(data);
       }
@@ -65,15 +68,17 @@ app.controller('userController', ['$http', '$location', '$scope', 'userService',
       console.log(err);
     })
   }
+  console.log(userService.getUser());
 
 }]);
-app.controller('recordController', ['$http', '$location', function($http, $location) {
+app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
   var record = {
         complaint: "",
         bodySystem: "",
         description: "",
-        treatment: ""
+        treatment: "",
+        author: this.userService.getUser().name
       }
 
   $http.get('/records/all').success(function (data) {

@@ -1,5 +1,30 @@
-<h1>{{userCtrl.currentUser.name}}</h1>
-<table class="u-full-width">
+{{userCtrl.userService.getUser()}}
+<h1 ng-bind="userService.getUser()"></h1>
+<table class="u-full-width" ng-show="userCtrl.user.doctor == 'false'">
+  <thead>
+    <tr>
+      <th>Age</th>
+      <th>Gender</th>
+      <th>Height</th>
+      <th>Weight</th>
+      <th>Blood Pressure</th>
+      <th>Medications</th>
+      <th>Family History</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{userCtrl.user.age}}</td>
+      <td>{{userCtrl.user.gender}}</td>
+      <td>{{userCtrl.user.height}}</td>
+      <td>{{userCtrl.user.weight}}</td>
+      <td>{{userCtrl.user.bloodPressure}}</td>
+      <td>{{userCtrl.user.currentMedications}}</td>
+      <td>{{userCtrl.user.familyHistory}}</td>
+    </tr>
+  <tbody/>
+<table/>
+<table class="u-full-width" ng-show="userCtrl.user.doctor == 'true'">
   <thead>
     <tr>
       <th>Age</th>
@@ -23,14 +48,20 @@
     </tr>
   <tbody/>
 <table/>
-
 <v-accordion>
   <v-pane ng-repeat="record in userCtrl.currentUser.records">
     <v-pane-header>
       {{record.complaint}} -- {{record.date}}
     </v-pane-header>
     <v-pane-content>
-      
+    </v-pane-content>
+  </v-pane>
+  <v-pane>
+    <v-pane-header>
+      Add a new record
+    </v-pane-header>
+    <v-pane-content>
+      <a href="/records/new">new record</a>
     </v-pane-content>
   </v-pane>
 </v-accordion>
