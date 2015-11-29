@@ -94,18 +94,4 @@ router.post('/login', function(req, res) {
   });
 });
 
-  // router.get('/:id/view', function (req, res) {
-  //   console.log(req.params);
-  //   User.findById({
-  //     req.params.id
-  //   }, function (err, user) {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       console.log(user);
-  //       res.json(user)
-  //     }
-  //   });
-  // });
-
 module.exports = router;

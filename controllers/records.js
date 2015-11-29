@@ -5,7 +5,12 @@ var express = require('express'),
     Record = require('../models/recordModel.js'),
     User = require('../models/userModel.js');
 
-
+    router.use(session({
+      secret: "phantomphildius",
+      resave : true,
+      saveUninitialized: true
+    }));
+    
   router.post('/new', function (req, res) {
     var newRecord = new Record({
       author: req.session.currentUser.name,

@@ -74,7 +74,7 @@ app.controller('userController', ['$http', '$location', 'userService', function(
 
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
-  
+
   $http.get('/records/all').success(function (data) {
     controller.records = data;
   });
@@ -91,7 +91,7 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
       console.log(data);
       if (data) {
         console.log(data);
-        // userService.getUser().push
+        userService.getUser().records.push(data.data.record)
         $location.path('/users/' + userService.getUser()._id + '/view');
       } else {
         $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
