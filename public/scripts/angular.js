@@ -85,6 +85,12 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     });
   }
 
+  this.addUser = function () {
+    $('#doctor-tile').click(function () {
+      console.log(this);
+    })
+  }
+
 }]);
 
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
