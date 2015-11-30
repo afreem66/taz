@@ -106,7 +106,7 @@ router.get('/:id/view', function (req, res) {
         res.json({error: "there was an error finding the user" + findErr})
       } else {
         console.log(foundUser);
-        res.json({user: foundUser})
+        res.end({user: foundUser})
       }
   });
 
@@ -116,7 +116,7 @@ router.get('/:id/view', function (req, res) {
       res.json({error: "there was an error getting all users" + findAllErr})
     } else {
       console.log(findAllUsers);
-      res.end({users: findAllUsers})
+      res.json({users: "the users", findAllUsers})
     }
   });
 

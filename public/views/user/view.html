@@ -49,7 +49,7 @@
 </v-accordion>
 <div class="">
   <button type="button" ng-click="userCtrl.findAllUsers()" >Find a new Doctor</button>
-  <div ng-repeat="doc in userCtrl.doctors.users" class="doctor-tile">
+  <div ng-repeat="doc in userCtrl.doctors" class="doctor-tile">
     {{doc.name}}
     </br>
     {{doc.specialty}}

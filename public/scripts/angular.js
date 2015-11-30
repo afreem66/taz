@@ -75,10 +75,13 @@ app.controller('userController', ['$http', '$location', 'userService', function(
   this.findAllUsers = function () {
     $http.get('/users/' + userService.getUser()._id + '/view')
     .success(function (data) {
-      console.log(data);
-      console.log("found the users!");
-      controller.doctors = data;
-      console.log(controller.doctors.users);
+      var users = data.findAllUsers
+      controller.doctors = [];
+      for (var i = 0; i < users.length; i++) {
+        if (users[i].doctor === true) {
+          controller.doctors.push(users[i])
+        }
+      }
     });
   }
 
