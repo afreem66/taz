@@ -101,7 +101,7 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
         $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
       }
     }, function(err){
-      console.log("there was an error: " + err);
+      console.log(err);
     });
   }
 

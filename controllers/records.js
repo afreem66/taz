@@ -29,9 +29,26 @@ var express = require('express'),
       } else {
         var user = res.locals.user;
         console.log(user);
-        user.records.push(saveRecord);
+        user.records.push(saveRecord._id);
         console.log(user);
-        // user.update(function(saveErr, updateUser) {
+        // console.log(saveRecord._id);
+        // console.log(newRecord._id);
+
+        User.findOneAndUpdate( {
+          _id: user._id
+        }, {
+          records: user.records
+        }, function(err, updatedUser){
+          if (err) {
+            console.log("ya done fucked up: ", err);
+            res.json({error: err})
+          } else {
+            console.log("we did it!");
+            res.end(updatedUser);
+          }
+        });
+
+        // user.save(function(saveErr, updateUser) {
         //   if (saveErr) {
         //     console.log("there was an error saving the user with new array" + saveErr)
         //   } else {

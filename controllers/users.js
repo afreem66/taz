@@ -51,7 +51,7 @@ var express = require('express'),
           res.json({error: "There was a save error: " + saveErr});
         } else {
           console.log("saved user" + saveUser);
-          req.session.currentUser = saveUser
+          req.session.currentUser = newUser
           console.log("current user" + req.session.currentUser);
           res.json({currentUser: saveUser})
         }
@@ -96,8 +96,10 @@ router.post('/login', function(req, res) {
 
 router.get('/:id/view', function (req, res) {
   console.log('hello we hit the get route');
-  User.findOne(
-    {name: res.locals.user.name},
+  User
+  .findOne({name: res.locals.user.name})
+  .populate('records')
+  .exec(
     function(findErr, foundUser) {
       if (findErr) {
         console.log(findErr);
