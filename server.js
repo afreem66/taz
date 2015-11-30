@@ -9,7 +9,6 @@ var express = require('express'),
     morgan = require('morgan'),
     session = require('express-session'),
     bcrypt = require('bcryptjs'),
-    // accordion = require('v-accordion'),
     Record = require('./models/recordModel.js'),
     User = require('./models/userModel.js');
 
@@ -18,6 +17,9 @@ server.use(session({
   resave : true,
   saveUninitialized: true
 }));
+
+// server.set('views', './views');
+// server.set('view engine', 'html');
 
 server.use(express.static('./public'));
 
@@ -32,8 +34,8 @@ server.use(function (req, res, next) {
   next();
 });
 
-server.use('/', function (req, res) {
-  res.render('index')
+server.get('/', function (req, res) {
+  res.render('index.html')
 })
 
 var recordController = require('./controllers/records.js');
