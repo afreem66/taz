@@ -30,11 +30,7 @@ server.use(morgan('dev'));
 server.use(function (req, res, next) {
   res.locals.user = req.session.currentUser;
   next();
-})
-
-server.patch('/posts/new', function(req, res) {
-  find
-})
+});
 
 var recordController = require('./controllers/records.js');
 server.use('/records', recordController);
