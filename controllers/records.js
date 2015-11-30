@@ -10,10 +10,11 @@ var express = require('express'),
       resave : true,
       saveUninitialized: true
     }));
-    
+
   router.post('/new', function (req, res) {
     var newRecord = new Record({
       author: req.session.currentUser.name,
+      _author: req.session.currentUser._id,
       complaint: req.body.complaint,
       bodySystem : req.body.bodySystem,
       description : req.body.description,
@@ -26,6 +27,17 @@ var express = require('express'),
       if (err) {
         res.json({error: "There was an error: " + err});
       } else {
+        var user = res.locals.user;
+        console.log(user);
+        user.records.push(saveRecord);
+        console.log(user);
+        // user.update(function(saveErr, updateUser) {
+        //   if (saveErr) {
+        //     console.log("there was an error saving the user with new array" + saveErr)
+        //   } else {
+        //     console.log(updateUser);
+        //   }
+        // })
         res.json({record: saveRecord})
       }
     })

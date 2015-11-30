@@ -94,4 +94,31 @@ router.post('/login', function(req, res) {
   });
 });
 
+router.get('/:id/view', function (req, res) {
+  console.log('hello we hit the get route');
+  User.findOne(
+    {name: res.locals.user.name},
+    function(findErr, foundUser) {
+      if (findErr) {
+        console.log(findErr);
+        res.json({error: "there was an error finding the user" + findErr})
+      } else {
+        console.log(foundUser);
+        res.json({user: foundUser})
+      }
+  });
+
+  // Record.find({
+  //   author: res.locals.user.name
+  // }, function(recErr, foundRec) {
+  //   if (recErr) {
+  //     console.log(recErr);
+  //     res.json({error: "there was an error finding the user records" + recErr})
+  //   } else {
+  //     console.log(foundRec);
+  //     res.json({records: foundRec})
+  //   }
+  // })
+});
+
 module.exports = router;

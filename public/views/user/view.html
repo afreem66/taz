@@ -37,17 +37,23 @@
     </tr>
   <tbody/>
 <table/>
-<v-accordion ng-show="userCtrl.currentUser.doctor == false">
+<v-accordion class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
   <v-pane ng-repeat="record in userCtrl.currentUser.records">
     <v-pane-header>
       {{record.complaint}} -- {{record.date}}
     </v-pane-header>
     <v-pane-content>
+      {{record.bodySystem}}
+      {{record.description}}
+      {{record.treatment}}
     </v-pane-content>
   </v-pane>
   <v-pane>
     <v-pane-header>
-      <a href="/records/new">new record</a>
+      new record
     </v-pane-header>
+    <v-pane-content>
+      <a href='/records/new'>new record</a>
+    </v-pane-content>
   </v-pane>
 </v-accordion>

@@ -32,6 +32,10 @@ server.use(function (req, res, next) {
   next();
 })
 
+server.patch('/posts/new', function(req, res) {
+  find
+})
+
 var recordController = require('./controllers/records.js');
 server.use('/records', recordController);
 

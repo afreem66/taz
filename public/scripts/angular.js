@@ -62,7 +62,9 @@ app.controller('userController', ['$http', '$location', 'userService', function(
         console.log(controller.user);
 
         $location.path('/users/' + userService.getUser()._id + '/view')
-        console.log(controller.currentUser);
+        // $http.get('user/' + userService.getUser()._id + '/view').success(function (data) {
+        //   controller.records = data
+        // })
       } else {
         console.log(data);
       }
@@ -70,14 +72,16 @@ app.controller('userController', ['$http', '$location', 'userService', function(
       console.log(err);
     })
   }
+
+
 }]);
 
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
 
-  $http.get('/records/all').success(function (data) {
-    controller.records = data;
-  });
+  // $http.get('/records/all').success(function (data) {
+  //   controller.records = data;
+  // });
 
   this.createRecord = function () {
     $http.post('/records/new', {

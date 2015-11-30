@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    Record = require('../models/recordModel.js');
 
     var userSchema = new Schema ({
       email: {type: String, required: true},
@@ -12,7 +13,7 @@ var mongoose = require('mongoose'),
       hospital: {type: String},
       patients: [ {type: Number} ],
       doctors: [ {type: Number} ],
-      records: [ {type: Number} ],
+      records: [ { type: Schema.Types.ObjectId, ref: 'Story' } ],
       currentMedications: {type: String},
       familyHistory: {type: String},
       height: {type: String},
