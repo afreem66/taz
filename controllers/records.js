@@ -43,6 +43,12 @@ var express = require('express'),
     })
   });
 
+  router.patch('/new', function(req, res) {
+    User.findByIdAndUpdate({
+      res.locals.user.id
+    })
+  })
+
   router.get('/all', function (req, res) {
     Record.find({}, function (err, records) {
       console.log(records);
