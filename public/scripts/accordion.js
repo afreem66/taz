@@ -585,4 +585,4 @@ function PaneDirectiveController ($scope) {
 }
 PaneDirectiveController.$inject = ['$scope'];
 
-})(angular);
+})
