@@ -1,4 +1,6 @@
 <h1>{{userCtrl.currentUser.name}}</h1>
+
+<!-- this is the patient view -->
 <table class="u-full-width" ng-show="userCtrl.currentUser.doctor == false">
   <thead>
     <tr>
@@ -23,6 +25,43 @@
     </tr>
   <tbody/>
 <table/>
+<v-accordion id="patient-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
+  <v-pane ng-repeat="record in userCtrl.currentUser.records">
+    <v-pane-header>
+      <h5> {{record.complaint}} -- {{record.date}} </h5>
+    </v-pane-header>
+    <v-pane-content>
+      <p>
+        {{record.bodySystem}} |
+        {{record.description}} |
+        {{record.treatment}} |
+      </p>
+    </v-pane-content>
+  </v-pane>
+  <v-pane>
+    <v-pane-header>
+      <h5> new record </h5>
+    </v-pane-header>
+    <v-pane-content>
+      <a href='/records/new'>new record</a>
+    </v-pane-content>
+  </v-pane>
+</v-accordion>
+<div class="">
+  <button type="button" ng-click="userCtrl.findAllUsers()" >Find a new Doctor</button>
+  <div ng-repeat="doc in userCtrl.doctors.users" class="doctor-tile">
+    {{doc.name}}
+    </br>
+    {{doc.specialty}}
+  </div>
+</div>
+<div class="doctor-array" ng-show="userCtrl.currentUser.doctor == false">
+  <div class="doctor-tile" ng-repeat="doc in userCtrl.currentUser.doctors">
+    {{doc.name}}
+  </div>
+</div>
+
+<!-- this is the doctor view -->
 <table class="u-full-width" ng-show="userCtrl.currentUser.doctor == true">
   <thead>
     <tr>
@@ -37,20 +76,22 @@
     </tr>
   <tbody/>
 <table/>
-<v-accordion class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
+<v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
   <v-pane ng-repeat="record in userCtrl.currentUser.records">
     <v-pane-header>
-      {{record.complaint}} -- {{record.date}}
+      <h5> {{record.complaint}} -- {{record.date}} </h5>
     </v-pane-header>
     <v-pane-content>
-      {{record.bodySystem}}
-      {{record.description}}
-      {{record.treatment}}
+      <p>
+        {{record.bodySystem}} |
+        {{record.description}} |
+        {{record.treatment}} |
+      </p>
     </v-pane-content>
   </v-pane>
   <v-pane>
     <v-pane-header>
-      new record
+      <h5> new record </h5>
     </v-pane-header>
     <v-pane-content>
       <a href='/records/new'>new record</a>

@@ -110,17 +110,16 @@ router.get('/:id/view', function (req, res) {
       }
   });
 
-  // Record.find({
-  //   author: res.locals.user.name
-  // }, function(recErr, foundRec) {
-  //   if (recErr) {
-  //     console.log(recErr);
-  //     res.json({error: "there was an error finding the user records" + recErr})
-  //   } else {
-  //     console.log(foundRec);
-  //     res.json({records: foundRec})
-  //   }
-  // })
+  User.find({}, function(findAllErr, findAllUsers) {
+    if (findAllErr) {
+      console.log(findAllErr);
+      res.json({error: "there was an error getting all users" + findAllErr})
+    } else {
+      console.log(findAllUsers);
+      res.end({users: findAllUsers})
+    }
+  });
+
 });
 
 module.exports = router;

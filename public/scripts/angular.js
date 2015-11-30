@@ -22,6 +22,7 @@ app.controller('userController', ['$http', '$location', 'userService', function(
   var controller = this;
   controller.currentUser = userService.getUser()
   console.log(controller.currentUser);
+
   this.docSignUp = function () {
     $http.post('/users/new', {
       email: controller.user.email,
@@ -62,9 +63,7 @@ app.controller('userController', ['$http', '$location', 'userService', function(
         console.log(controller.user);
 
         $location.path('/users/' + userService.getUser()._id + '/view')
-        // $http.get('user/' + userService.getUser()._id + '/view').success(function (data) {
-        //   controller.records = data
-        // })
+
       } else {
         console.log(data);
       }
@@ -73,6 +72,15 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     })
   }
 
+  this.findAllUsers = function () {
+    $http.get('/users/' + userService.getUser()._id + '/view')
+    .success(function (data) {
+      console.log(data);
+      console.log("found the users!");
+      controller.doctors = data;
+      console.log(controller.doctors.users);
+    });
+  }
 
 }]);
 
