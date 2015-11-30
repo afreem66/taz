@@ -32,7 +32,7 @@ server.use(function (req, res, next) {
   next();
 });
 
-server.use('/' function (req, res) {
+server.use('/', function (req, res) {
   res.render('index')
 })
 
