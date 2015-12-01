@@ -28,7 +28,7 @@
 <v-accordion id="patient-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
   <v-pane ng-repeat="record in userCtrl.currentUser.records">
     <v-pane-header>
-      <h5> {{record.complaint}} -- {{record.date}} </h5>
+      <h6> {{record.complaint}} -- {{record.date}} </h6>
     </v-pane-header>
     <v-pane-content>
       <p>
@@ -40,18 +40,17 @@
   </v-pane>
   <v-pane>
     <v-pane-header>
-      <h5> new record </h5>
+      <h6> new record </h6>
     </v-pane-header>
     <v-pane-content>
       <a href='/records/new'>new record</a>
     </v-pane-content>
   </v-pane>
 </v-accordion>
-<div class="">
+<div class="new-doctor-array" ng-repeat="doc in userCtrl.currentUser.doctors">
   <button type="button" ng-click="userCtrl.findAllUsers()" >Find a new Doctor</button>
-  <div ng-repeat="doc in userCtrl.doctors" class="doctor-tile">
+  <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
     {{doc.name}}
-    </br>
     {{doc.specialty}}
   </div>
 </div>
@@ -77,21 +76,51 @@
   <tbody/>
 <table/>
 <v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
-  <v-pane ng-repeat="record in userCtrl.currentUser.records">
+  <v-pane ng-repeat="patient in userCtrl.currentUser.patients">
     <v-pane-header>
-      <h5> {{record.complaint}} -- {{record.date}} </h5>
+      <h6> {{patient.name}} </h6>
     </v-pane-header>
     <v-pane-content>
-      <p>
-        {{record.bodySystem}} |
-        {{record.description}} |
-        {{record.treatment}} |
-      </p>
+      <v-accordion id="doctor-sub-accordion" class="vAccordion--default">
+        <v-pane>
+          <v-pane-header>
+            <h6> Patient information </h6>
+          </v-pane-header>
+          <v-pane-content>
+            {{patient.age}}
+            {{patient.gender}}
+            {{patient.height}}
+            {{patient.weight}}
+            {{patient.bloodPressure}}
+            {{patient.currentMedications}}
+            {{patient.familyHistory}}
+          </v-pane-content>
+        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records">
+          <v-pane-header>
+            <h6> {{record.complaint}} -- {{record.date}} </h6>
+          </v-pane-header>
+          <v-pane-content>
+            <p>
+              {{record.bodySystem}} |
+              {{record.description}} |
+              {{record.treatment}} |
+            </p>
+          </v-pane-content>
+        </v-pane>
+        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records">
+          <v-pane-header>
+            <h6> Add a new record </h6>
+          </v-pane-header>
+          <v-pane-content>
+            <a href='/records/new'>new record</a>
+          </v-pane-content>
+        </v-pane>
+      </v-accordion>
     </v-pane-content>
   </v-pane>
   <v-pane>
     <v-pane-header>
-      <h5> new record </h5>
+      <h6> new record </h6>
     </v-pane-header>
     <v-pane-content>
       <a href='/records/new'>new record</a>

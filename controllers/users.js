@@ -63,16 +63,29 @@ var express = require('express'),
   });
 
 // login
-
+//find user here and populate records
 router.post('/login', function(req, res) {
   User.findOne({email : req.body.email}, function(loginErr, user) {
 
     if (user && user.passwordDigest === req.body.passwordDigest) {
       req.session.currentUser = user;
-      res.json({user: user})
+      User
+      .findOne({name: req.session.currentUser.name})
+      .populate('records')
+      .exec(
+        function(findErr, foundUser) {
+          if (findErr) {
+            console.log(findErr);
+            res.json({error: "there was an error finding the user", findErr})
+          } else {
+            console.log("This is thhe found usero" + foundUser);
+            res.end({user: "Here is the user with populated records", foundUser})
+          }
+      });
+      res.json({user: "This is the logged in user", user})
     } else {
       console.log("There was a login error" + loginErr);
-      res.json({error: "there was a login error: " + loginErr})
+      res.end({error: "there was a login error: ",  loginErr})
     }
     // if (loginErr) {
     //       res.json({error: "there was a login error: " + loginErr})
@@ -103,23 +116,38 @@ router.get('/:id/view', function (req, res) {
     function(findErr, foundUser) {
       if (findErr) {
         console.log(findErr);
-        res.json({error: "there was an error finding the user" + findErr})
+        res.json({error: "there was an error finding the user", findErr})
       } else {
         console.log(foundUser);
-        res.end({user: foundUser})
+        res.end({user: "Here is the user with populated records", foundUser})
       }
   });
 
   User.find({}, function(findAllErr, findAllUsers) {
     if (findAllErr) {
       console.log(findAllErr);
-      res.json({error: "there was an error getting all users" + findAllErr})
+      res.json({error: "there was an error getting all users", findAllErr})
     } else {
       console.log(findAllUsers);
       res.json({users: "the users", findAllUsers})
     }
   });
 
+});
+
+router.patch('/:id/view/:docId', function (req, res) {
+  User.findOneAndUpdate({
+    _id : res.locals.user._id
+  }, {$push: {doctors : req.params.docId}}, function (updateErr, updatedUser) {
+    if (updateErr) {
+      console.log("it broke " + updateErr);
+      res.json({error: "there was an error updating the users doctors array", updateErr})
+    } else {
+      console.log("you updated the doctor array");
+      console.log(updatedUser);
+      res.json({user: "Here is the user with new doctors", updatedUser})
+    }
+  });
 });
 
 module.exports = router;

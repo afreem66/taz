@@ -23,7 +23,7 @@ app.controller('userController', ['$http', '$location', 'userService', function(
   controller.currentUser = userService.getUser()
   console.log(controller.currentUser);
 
-  this.docSignUp = function () {
+  this.userSignUp = function () {
     $http.post('/users/new', {
       email: controller.user.email,
       passwordDigest: controller.user.passwordDigest,
@@ -59,11 +59,14 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     }).then(function(data) {
       if (!data.data.error) {
         console.log(data.data.user);
-        userService.setUser(data.data.user)
+        userService.setUser(data.data.user);
         console.log(controller.user);
-
         $location.path('/users/' + userService.getUser()._id + '/view')
-
+        // $http.get('/users/' + userService.getUser()._id + '/view').then(
+        //   function (data) {
+        //     console.log(data);
+        //   }
+        // );
       } else {
         console.log(data);
       }
@@ -85,10 +88,16 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     });
   }
 
-  this.addUser = function () {
-    $('#doctor-tile').click(function () {
-      console.log(this);
-    })
+  this.addDoctor = function (index) {
+     var newDoc = controller.doctors[index]._id;
+     console.log(newDoc);
+    $http.patch('/users/' + userService.getUser()._id + '/view/' + newDoc, newDoc)
+    .then(function (data) {
+        console.log(data);
+        // controller.currentUser.doctors.push(doctor);
+      }, function (err) {
+        console.log(err);
+      });
   }
 
 }]);
@@ -136,6 +145,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'userController',
     controllerAs: 'userCtrl'
   }).when('/users/:id/view', {
+    templateUrl: 'views/user/view.html',
+    controller: 'userController',
+    controllerAs: 'userCtrl'
+  }).when('/users/:id/view/:docId', {
     templateUrl: 'views/user/view.html',
     controller: 'userController',
     controllerAs: 'userCtrl'

@@ -47,24 +47,10 @@ var express = require('express'),
             res.end(updatedUser);
           }
         });
-
-        // user.save(function(saveErr, updateUser) {
-        //   if (saveErr) {
-        //     console.log("there was an error saving the user with new array" + saveErr)
-        //   } else {
-        //     console.log(updateUser);
-        //   }
-        // })
         res.json({record: saveRecord})
       }
     })
   });
 
-  router.get('/all', function (req, res) {
-    Record.find({}, function (err, records) {
-      console.log(records);
-      res.json(records)
-    });
-  });
 
 module.exports = router;
