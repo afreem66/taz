@@ -72,8 +72,8 @@ app.controller('userController', ['$http', '$location', 'userService', function(
 
   this.findAllUsers = function () {
     $http.get('/users/' + userService.getUser()._id + '/view')
-    .success(function (data) {
-      var users = data.findAllUsers
+    .success(function (response) {
+      var users = response.users
       controller.doctors = [];
       for (var i = 0; i < users.length; i++) {
         if (users[i].doctor === true) {
@@ -84,12 +84,13 @@ app.controller('userController', ['$http', '$location', 'userService', function(
   }
 
   this.addDoctor = function (index) {
-     var newDoc = controller.doctors[index]._id;
+     var newDoc = controller.doctors[index];
      console.log(newDoc);
-    $http.patch('/users/' + userService.getUser()._id + '/view/' + newDoc, newDoc)
+     console.log(controller.currentUser);
+    $http.patch('/users/' + userService.getUser()._id + '/view/' + newDoc._id)
     .then(function (data) {
         console.log(data);
-        // controller.currentUser.doctors.push(doctor);
+        controller.currentUser.doctors.push(newDoc);
       }, function (err) {
         console.log(err);
       });

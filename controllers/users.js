@@ -111,21 +111,6 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/:id/view', function (req, res) {
-  console.log('hello we hit the get route');
-  User
-  .findOne({name: res.locals.user.name})
-  .populate('records')
-  .exec(
-    function(findErr, foundUser) {
-      if (findErr) {
-        console.log(findErr);
-        res.json({message: "there was an error finding the user", error: findErr})
-      } else {
-        console.log(foundUser);
-        res.json({message: "Here is the user with populated records", user: foundUser})
-      }
-  });
-
   User.find({}, function(findAllErr, findAllUsers) {
     if (findAllErr) {
       console.log(findAllErr);
@@ -135,7 +120,6 @@ router.get('/:id/view', function (req, res) {
       res.json({message: "the users", users: findAllUsers})
     }
   });
-
 });
 
 router.patch('/:id/view/:docId', function (req, res) {
