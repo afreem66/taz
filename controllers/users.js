@@ -20,10 +20,10 @@ var express = require('express'),
       function (err, user) {
         if (err) {
           console.log(err);
-          res.json({error: "there was a login error: " + err})
+          res.json({message: "there was a login error: ", error: err})
         } else if (user) {
           console.log("this user already exists: " + user);
-          res.json({error: "there was an user error: " + user})
+          res.json({message: "there was an user error: ", exisitngUser: user})
         } else {
           bcrypt.genSalt(10, function (saltErr, salt) {
             bcrypt.hash(req.body.passwordDigest,
@@ -49,12 +49,12 @@ var express = require('express'),
 
       newUser.save(function (saveErr, saveUser) {
         if (saveErr) {
-          res.json({error: "There was a save error: " + saveErr});
+          res.json({message: "There was a save error: ", error: saveErr});
         } else {
           console.log("saved user" + saveUser);
           req.session.currentUser = newUser
           console.log("current user" + req.session.currentUser);
-          res.json({currentUser: saveUser})
+          res.json({message: "User saved", currentUser: saveUser})
         }
       });
           });
@@ -77,7 +77,7 @@ router.post('/login', function(req, res) {
         function(findErr, foundUser) {
           if (findErr) {
             console.log(findErr);
-            res.json({error: "there was an error finding the user", findErr})
+            res.json({message: "there was an error finding the user", error: findErr})
           } else {
             console.log("This is thhe found usero" + foundUser);
             res.json({
@@ -86,10 +86,9 @@ router.post('/login', function(req, res) {
             })
           }
       });
-      // res.json({user: "This is the logged in user", user})
     } else {
       console.log("There was a login error" + loginErr);
-      res.end({error: "there was a login error: ",  loginErr})
+      res.json({message: "there was a login error: ",  error: loginErr})
     }
     // if (loginErr) {
     //       res.json({error: "there was a login error: " + loginErr})
@@ -120,20 +119,20 @@ router.get('/:id/view', function (req, res) {
     function(findErr, foundUser) {
       if (findErr) {
         console.log(findErr);
-        res.json({error: "there was an error finding the user", findErr})
+        res.json({message: "there was an error finding the user", error: findErr})
       } else {
         console.log(foundUser);
-        res.end({user: "Here is the user with populated records", foundUser})
+        res.json({message: "Here is the user with populated records", user: foundUser})
       }
   });
 
   User.find({}, function(findAllErr, findAllUsers) {
     if (findAllErr) {
       console.log(findAllErr);
-      res.json({error: "there was an error getting all users", findAllErr})
+      res.json({messgae: "there was an error getting all users", error: findAllErr})
     } else {
       console.log(findAllUsers);
-      res.json({users: "the users", findAllUsers})
+      res.json({message: "the users", users: findAllUsers})
     }
   });
 
@@ -145,11 +144,11 @@ router.patch('/:id/view/:docId', function (req, res) {
   }, {$push: {doctors : req.params.docId}}, function (updateErr, updatedUser) {
     if (updateErr) {
       console.log("it broke " + updateErr);
-      res.json({error: "there was an error updating the users doctors array", updateErr})
+      res.json({messgae: "there was an error updating the users doctors array", error: updateErr})
     } else {
       console.log("you updated the doctor array");
       console.log(updatedUser);
-      res.json({user: "Here is the user with new doctors", updatedUser})
+      res.json({message: "Here is the user with new doctors", user: updatedUser})
     }
   });
 });
