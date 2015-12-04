@@ -1,14 +1,14 @@
 var app = angular.module('TazApp', ['ngRoute','vAccordion']);
 
 app.service('userService', function() {
-  var controller = this;
+  var service = this;
 
   this.setUser = function(user) {
-    controller.currentUser = user;
+    service.currentUser = user;
   }
 
   this.getUser = function() {
-    return controller.currentUser;
+    return service.currentUser;
   }
 
 });
@@ -56,19 +56,14 @@ app.controller('userController', ['$http', '$location', 'userService', function(
     $http.post('/users/login', {
       email: controller.user.email,
       passwordDigest: controller.user.passwordDigest
-    }).then(function(data) {
-      if (!data.data.error) {
-        console.log(data.data.user);
-        userService.setUser(data.data.user);
-        console.log(controller.user);
-        $location.path('/users/' + userService.getUser()._id + '/view')
-        // $http.get('/users/' + userService.getUser()._id + '/view').then(
-        //   function (data) {
-        //     console.log(data);
-        //   }
-        // );
+    }).then(function(response) {
+      if (!response.data.error) {
+        userService.setUser(response.data.user);
+        controller.currentUser = userService.getUser();
+
+        $location.path('/users/' + controller.currentUser._id + '/view')
       } else {
-        console.log(data);
+        console.log(response);
       }
     }, function (err) {
       console.log(err);

@@ -30,6 +30,7 @@ var express = require('express'),
             salt, function(hashErr, hash) {
               console.log(hash);
           var newUser = new User({
+            //change to req.body only
             email: req.body.email,
             passwordDigest : req.body.passwordDigest,
             name : req.body.name,
@@ -79,10 +80,13 @@ router.post('/login', function(req, res) {
             res.json({error: "there was an error finding the user", findErr})
           } else {
             console.log("This is thhe found usero" + foundUser);
-            res.end({user: "Here is the user with populated records", foundUser})
+            res.json({
+              message: "Here is the user with populated records",
+              user: foundUser
+            })
           }
       });
-      res.json({user: "This is the logged in user", user})
+      // res.json({user: "This is the logged in user", user})
     } else {
       console.log("There was a login error" + loginErr);
       res.end({error: "there was a login error: ",  loginErr})

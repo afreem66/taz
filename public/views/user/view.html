@@ -26,7 +26,7 @@
   <tbody/>
 <table/>
 <v-accordion id="patient-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
-  <v-pane ng-repeat="record in userCtrl.currentUser.records">
+  <v-pane ng-repeat="record in userCtrl.currentUser.records track by $index">
     <v-pane-header>
       <h6> {{record.complaint}} -- {{record.date}} </h6>
     </v-pane-header>
@@ -47,7 +47,7 @@
     </v-pane-content>
   </v-pane>
 </v-accordion>
-<div class="new-doctor-array" ng-repeat="doc in userCtrl.currentUser.doctors">
+<div class="new-doctor-array">
   <button type="button" ng-click="userCtrl.findAllUsers()" >Find a new Doctor</button>
   <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
     {{doc.name}}
@@ -55,7 +55,7 @@
   </div>
 </div>
 <div class="doctor-array" ng-show="userCtrl.currentUser.doctor == false">
-  <div class="doctor-tile" ng-repeat="doc in userCtrl.currentUser.doctors">
+  <div class="doctor-tile" ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
     {{doc.name}}
   </div>
 </div>
@@ -76,7 +76,7 @@
   <tbody/>
 <table/>
 <v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
-  <v-pane ng-repeat="patient in userCtrl.currentUser.patients">
+  <v-pane ng-repeat="patient in userCtrl.currentUser.patients track by $index">
     <v-pane-header>
       <h6><a href="/users/:id/view">{{patient.name}}</a></h6>
     </v-pane-header>
@@ -95,7 +95,7 @@
             {{patient.currentMedications}}
             {{patient.familyHistory}}
           </v-pane-content>
-        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records">
+        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records track by $index">
           <v-pane-header>
             <h6> {{record.complaint}} -- {{record.date}} </h6>
           </v-pane-header>
@@ -107,7 +107,7 @@
             </p>
           </v-pane-content>
         </v-pane>
-        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records">
+        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records track by $index">
           <v-pane-header>
             <h6> Add a new record </h6>
           </v-pane-header>
