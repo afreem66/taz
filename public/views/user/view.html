@@ -78,7 +78,7 @@
 <v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
   <v-pane ng-repeat="patient in userCtrl.currentUser.patients">
     <v-pane-header>
-      <h6> {{patient.name}} </h6>
+      <h6><a href="/users/:id/view">{{patient.name}}</a></h6>
     </v-pane-header>
     <v-pane-content>
       <v-accordion id="doctor-sub-accordion" class="vAccordion--default">
@@ -116,14 +116,6 @@
           </v-pane-content>
         </v-pane>
       </v-accordion>
-    </v-pane-content>
-  </v-pane>
-  <v-pane>
-    <v-pane-header>
-      <h6> new record </h6>
-    </v-pane-header>
-    <v-pane-content>
-      <a href='/records/new'>new record</a>
     </v-pane-content>
   </v-pane>
 </v-accordion>
