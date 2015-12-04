@@ -72,7 +72,7 @@ router.post('/login', function(req, res) {
       req.session.currentUser = user;
       User
       .findOne({name: req.session.currentUser.name})
-      .populate('records')
+      .populate('records doctors patients')
       .exec(
         function(findErr, foundUser) {
           if (findErr) {
