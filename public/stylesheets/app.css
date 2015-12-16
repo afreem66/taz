@@ -10,9 +10,12 @@ body {
 v-accordion {
 margin: 10%, auto;
 }
-
 table {
-  margin: auto 0;
+  margin: 0 auto;
+}
+th, td {
+  padding: 0 2rem;
+  text-align: center;
 }
 
 h1 {

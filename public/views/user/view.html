@@ -1,7 +1,6 @@
 <h1>{{userCtrl.currentUser.name}}</h1>
-
 <!-- this is the patient view -->
-<table class="u-full-width" ng-show="userCtrl.currentUser.doctor == false">
+<table  ng-show="userCtrl.currentUser.doctor == false">
   <thead>
     <tr>
       <th>Age</th>
@@ -15,26 +14,26 @@
   </thead>
   <tbody>
     <tr>
-      <td>{{userCtrl.currentUser.age}}</td>
-      <td>{{userCtrl.currentUser.gender}}</td>
-      <td>{{userCtrl.currentUser.height}}</td>
-      <td>{{userCtrl.currentUser.weight}}</td>
-      <td>{{userCtrl.currentUser.bloodPressure}}</td>
-      <td>{{userCtrl.currentUser.currentMedications}}</td>
-      <td>{{userCtrl.currentUser.familyHistory}}</td>
+      <td ng-bind="userCtrl.currentUser.age"></td>
+      <td ng-bind="userCtrl.currentUser.gender"></td>
+      <td ng-bind="userCtrl.currentUser.height"></td>
+      <td ng-bind="userCtrl.currentUser.weight"></td>
+      <td ng-bind="userCtrl.currentUser.bloodPressure"></td>
+      <td ng-bind="userCtrl.currentUser.currentMedications"></td>
+      <td ng-bind="userCtrl.currentUser.familyHistory"></td>
     </tr>
   <tbody/>
 <table/>
 <v-accordion id="patient-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
   <v-pane ng-repeat="record in userCtrl.currentUser.records track by $index">
     <v-pane-header>
-      <h6> {{record.complaint}} -- {{record.date}} </h6>
+      <h4> {{record.complaint}} -- {{record.date}} </h4>
     </v-pane-header>
     <v-pane-content>
       <p>
-        {{record.bodySystem}} |
-        {{record.description}} |
-        {{record.treatment}} |
+        {{record.bodySystem}}
+        {{record.description}}
+        {{record.treatment}}
       </p>
     </v-pane-content>
   </v-pane>
@@ -61,7 +60,7 @@
 </div>
 
 <!-- this is the doctor view -->
-<table class="u-full-width" ng-show="userCtrl.currentUser.doctor == true">
+<table ng-show="userCtrl.currentUser.doctor == true">
   <thead>
     <tr>
       <th>Hospital</th>
@@ -78,13 +77,13 @@
 <v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
   <v-pane ng-repeat="patient in userCtrl.currentUser.patients track by $index">
     <v-pane-header>
-      <h6>{{patient.name}}</h6>
+      <h4>{{patient.name}}</h4>
     </v-pane-header>
     <v-pane-content>
       <v-accordion class="doctor-sub-accordion" class="vAccordion--default">
         <v-pane>
           <v-pane-header>
-            <h6>Patient information</h6>
+            <h5>Patient information</h5>
           </v-pane-header>
           <v-pane-content>
             {{patient.age}}

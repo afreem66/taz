@@ -4,29 +4,34 @@
             ng-model="recordCtrl.record.date"
             id="date"
             placeholder="When did it happen?">
-     <label for="complaint">Complaint</label>
-     <input type="text"
-            ng-model="recordCtrl.record.complaint"
-            id="complaint"
-            placeholder="What is wrong?">
-     </br>
-     <label for="body-system">Body System</label>
-     <input type="text"
-            ng-model="recordCtrl.record.bodySystem"
-            id="body-system"
-            placeholder="What part of the Body?">
-     </br>
+     <div class="row">
+       <div class="one-third column">
+         <label for="complaint">Complaint</label>
+         <input class="u-full-width"type="text"
+                ng-model="recordCtrl.record.complaint"
+                id="complaint"
+                placeholder="What is wrong?">
+        </div>
+        <div class="one-third column">
+         <label for="body-system">Body System</label>
+         <input class="u-full-width"type="text"
+                ng-model="recordCtrl.record.bodySystem"
+                id="body-system"
+                placeholder="What part of the Body?">
+        </div>
+        <div class="one-third column">
+         <label for="treatment">Treatment</label>
+         <input class="u-full-width"type="text"
+                ng-model="recordCtrl.record.treatment"
+                id="treatment"
+                placeholder="How was it treated?">
+        </div>
+      </div>
      <label for="description">Description</label>
-     <input type="text"
+     <input class="u-full-width" type="text"
             ng-model="recordCtrl.record.description"
             id="description"
             placeholder="Further Details?">
-     </br>
-     <label for="treatment">Treatment</label>
-     <input type="text"
-            ng-model="recordCtrl.record.treatment"
-            id="treatment"
-            placeholder="How was it treated?">
      </br>
      <input type="submit" value="Save">
    </form>
