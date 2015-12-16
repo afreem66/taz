@@ -48,7 +48,7 @@
   </v-pane>
 </v-accordion>
 <div class="new-doctor-array">
-  <button type="button" ng-click="userCtrl.findAllUsers()" >Find a new Doctor</button>
+  <button type="button" ng-click="userCtrl.findAllUsers()" ng-show="userCtrl.currentUser.doctor == false">Find a new Doctor</button>
   <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
     {{doc.name}}
     {{doc.specialty}}
@@ -78,7 +78,7 @@
 <v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
   <v-pane ng-repeat="patient in userCtrl.currentUser.patients track by $index">
     <v-pane-header>
-      <h6><a href="/users/:id/view">{{patient.name}}</a></h6>
+      <h6>{{patient.name}}</h6>
     </v-pane-header>
     <v-pane-content>
       <v-accordion id="doctor-sub-accordion" class="vAccordion--default">
@@ -95,6 +95,7 @@
             {{patient.currentMedications}}
             {{patient.familyHistory}}
           </v-pane-content>
+        </v-pane>
         <v-pane ng-repeat="record in userCtrl.currentUser.patients.records track by $index">
           <v-pane-header>
             <h6> {{record.complaint}} -- {{record.date}} </h6>
@@ -107,12 +108,43 @@
             </p>
           </v-pane-content>
         </v-pane>
-        <v-pane ng-repeat="record in userCtrl.currentUser.patients.records track by $index">
+        <v-pane>
           <v-pane-header>
             <h6> Add a new record </h6>
           </v-pane-header>
           <v-pane-content>
-            <a href='/records/new'>new record</a>
+            <form ng-submit="userCtrl.docRecord()" class="new-record">
+               <label for="date">Date</label>
+               <input type="date"
+                      ng-model="userCtrl.record.date"
+                      id="date"
+                      placeholder="When did it happen?">
+               <label for="complaint">Complaint</label>
+               <input type="text"
+                      ng-model="userCtrl.record.complaint"
+                      id="complaint"
+                      placeholder="What is wrong?">
+               </br>
+               <label for="body-system">Body System</label>
+               <input type="text"
+                      ng-model="userCtrl.record.bodySystem"
+                      id="body-system"
+                      placeholder="What part of the Body?">
+               </br>
+               <label for="description">Description</label>
+               <input type="text"
+                      ng-model="userCtrl.record.description"
+                      id="description"
+                      placeholder="Further Details?">
+               </br>
+               <label for="treatment">Treatment</label>
+               <input type="text"
+                      ng-model="userCtrl.record.treatment"
+                      id="treatment"
+                      placeholder="How was it treated?">
+               </br>
+               <input type="submit" value="Save">
+             </form>
           </v-pane-content>
         </v-pane>
       </v-accordion>

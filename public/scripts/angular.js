@@ -13,11 +13,6 @@ app.service('userService', function() {
 
 });
 
-app.controller('mainController', ['$scope', '$route', '$routeParams', '$location', function ($scope, $route, $routeParams, $location) {
-  var controller = this;
-
-}]);
-
 app.controller('userController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
   controller.currentUser = userService.getUser()
@@ -38,14 +33,14 @@ app.controller('userController', ['$http', '$location', 'userService', function(
       height: controller.user.height,
       weight: controller.user.weight,
       bloodPressure: controller.user.bloodPressure
-    }).then(function(data) {
-      if (!data.data.error) {
-        console.log(data.data);
-        userService.setUser(data.data.user)
-        $location.path('/users/' + userService.getUser()._id + '/view');
-        console.log(data);
+    }).then(function(response) {
+      if (!response.data.error) {
+        console.log(response.data);
+        userService.setUser(response.data.currentUser);
+        controller.currentUser = userService.getUser();
+        $location.path('/users/' + controller.currentUser._id + '/view');
       } else {
-        console.log(data.data);
+        console.log(response.data);
       }
     }, function (err) {
       console.log(err);
@@ -60,7 +55,6 @@ app.controller('userController', ['$http', '$location', 'userService', function(
       if (!response.data.error) {
         userService.setUser(response.data.user);
         controller.currentUser = userService.getUser();
-
         $location.path('/users/' + controller.currentUser._id + '/view')
       } else {
         console.log(response);
@@ -89,11 +83,29 @@ app.controller('userController', ['$http', '$location', 'userService', function(
      console.log(controller.currentUser);
     $http.patch('/users/' + userService.getUser()._id + '/view/' + newDoc._id)
     .then(function (data) {
-        console.log(data);
         controller.currentUser.doctors.push(newDoc);
+        controller.doctors.splice(index);
       }, function (err) {
         console.log(err);
       });
+  }
+  this.docRecord = function() {
+    $http.post('/users/:id/view', {
+      complaint: controller.record.complaint,
+      bodySystem: controller.record.bodySystem,
+      description: controller.record.description,
+      treatment: controller.record.treatment,
+      author: userService.getUser().name,
+      date: controller.record.date
+    }).then(function(data) {
+      if (data.data.record) {
+        userService.getUser().patients[index].records.push(data.data.record);
+      } else {
+        $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
+      }
+    }, function(err) {
+      console.log(err);
+    })
   }
 
 }]);
@@ -113,11 +125,9 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
     treatment: controller.record.treatment,
     author: userService.getUser().name,
     date: controller.record.date
-    }).then(function(data){
-      console.log(data);
-      if (data) {
-        console.log(data);
-        userService.getUser().records.push(data.data.record)
+  }).then(function(response){
+      if (response) {
+        userService.getUser().records.push(response.data.record)
         $location.path('/users/' + userService.getUser()._id + '/view');
       } else {
         $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
@@ -126,7 +136,6 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
       console.log(err);
     });
   }
-
 
 }]);
 

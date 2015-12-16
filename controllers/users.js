@@ -133,8 +133,19 @@ router.patch('/:id/view/:docId', function (req, res) {
       console.log("you updated the doctor array");
       console.log(updatedUser);
       res.json({message: "Here is the user with new doctors", user: updatedUser})
+      User.findOneAndUpdate({
+        _id : req.params.docId
+      }, {$push: {patients : res.locals.user._id}}, function (updateDocErr, updatedDoc) {
+        if (updateDocErr) {
+          res.json({messgae: "there was an error updating the users patients array", error: updateDocErr})
+        } else {
+          console.log(updatedDoc);
+          res.end({message: "Here is the doctor with new patients", user: updatedDoc})
+        }
+      });
     }
   });
+
 });
 
 module.exports = router;
