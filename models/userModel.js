@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+    deepPopulate = require('mongoose-deep-populate')(mongoose),
     Schema = mongoose.Schema,
     Record = require('../models/recordModel.js');
 
@@ -21,6 +22,12 @@ var mongoose = require('mongoose'),
       bloodPressure: {type: String},
       pendingRequests: [ {type: String} ]
     }, {collection: 'user', strict: false});
+
+    userSchema.plugin(deepPopulate, {
+      whitelist: ['patients.records',
+                  'doctors',
+                  'records']
+    });
 
     var User = mongoose.model('User', userSchema);
 
