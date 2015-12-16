@@ -94,6 +94,7 @@
             {{patient.bloodPressure}}
             {{patient.currentMedications}}
             {{patient.familyHistory}}
+            {{patient.records}}
           </v-pane-content>
         </v-pane>
         <v-pane ng-repeat="record in userCtrl.currentUser.patients.records track by $index">

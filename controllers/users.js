@@ -72,14 +72,14 @@ router.post('/login', function(req, res) {
       req.session.currentUser = user;
       User
       .findOne({name: req.session.currentUser.name})
-      .populate('records doctors patients')
+      .deepPopulate('records doctors patients patients.records')
       .exec(
         function(findErr, foundUser) {
           if (findErr) {
             console.log(findErr);
             res.json({message: "there was an error finding the user", error: findErr})
           } else {
-            console.log("This is thhe found usero" + foundUser);
+            console.log("This is thhe found user" + foundUser);
             res.json({
               message: "Here is the user with populated records",
               user: foundUser
