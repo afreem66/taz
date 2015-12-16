@@ -63,11 +63,11 @@ v-pane-content {
 /* Theme: default
    ***************************************/
 .vAccordion--default v-accordion {
-  margin-top: 20px;
+  margin-top: 30px;
   padding-left: 20px; }
 .vAccordion--default v-pane {
-  -webkit-transition: -webkit-transform 1s;
-          transition: transform 1s; }
+  -webkit-transition: -webkit-transform 2s;
+          transition: transform 2s; }
   .vAccordion--default v-pane.is-expanded > v-pane-header {
     border-bottom-color: #2196F3; }
     .vAccordion--default v-pane.is-expanded > v-pane-header::after {
@@ -84,11 +84,11 @@ v-pane-content {
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0); }
   .vAccordion--default v-pane.is-expanded-add > v-pane-content, .vAccordion--default v-pane.is-expanded-remove > v-pane-content {
-    -webkit-transition: max-height 1s;
-            transition: max-height 1s; }
+    -webkit-transition: max-height 2s;
+            transition: max-height 2s; }
 .vAccordion--default v-pane-header {
   padding: 5px 0;
-  margin-bottom: 20px;
+  margin-top: 10px;
   border-bottom: 2px solid #D8D8D8;
   -webkit-transition: color 1s, border-color 1s;
           transition: color 1s, border-color 1s; }

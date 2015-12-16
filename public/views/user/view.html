@@ -81,10 +81,10 @@
       <h6>{{patient.name}}</h6>
     </v-pane-header>
     <v-pane-content>
-      <v-accordion id="doctor-sub-accordion" class="vAccordion--default">
+      <v-accordion class="doctor-sub-accordion" class="vAccordion--default">
         <v-pane>
           <v-pane-header>
-            <h6> Patient information </h6>
+            <h6>Patient information</h6>
           </v-pane-header>
           <v-pane-content>
             {{patient.age}}
@@ -98,14 +98,23 @@
         </v-pane>
         <v-pane ng-repeat="record in patient.records track by $index">
           <v-pane-header>
-            <h6> {{record.complaint}} -- {{record.date}} </h6>
+            <h6>Patient Records</h6>
           </v-pane-header>
           <v-pane-content>
-            <p>
-              {{record.bodySystem}} |
-              {{record.description}} |
-              {{record.treatment}} |
-            </p>
+            <v-accordion class="doctor-sub-sub" class="vAccordion--default">
+              <v-pane>
+                <v-pane-header>
+                  <h6> {{record.complaint}} -- {{record.date}} </h6>
+                </v-pane-header>
+                <v-pane-content>
+                  <p>
+                    {{record.bodySystem}} |
+                    {{record.description}} |
+                    {{record.treatment}} |
+                  </p>
+                </v-pane-content>
+              </v-pane>
+          </v-accordion>
           </v-pane-content>
         </v-pane>
         <v-pane>

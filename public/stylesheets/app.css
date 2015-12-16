@@ -7,16 +7,15 @@ body {
   text-align: center;
 }
 
-/*v-accordion {
+v-accordion {
 margin: 10%, auto;
-}*/
+}
+
+table {
+  margin: auto 0;
+}
 
 h1 {
   color: #f1f1f1;
   background: #333;
-}
-
-.doctor-tile {
-  border: 1px solid darkgray;
-  display: inline;
 }
