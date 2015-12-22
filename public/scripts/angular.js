@@ -13,6 +13,18 @@ app.service('userService', function() {
 
 });
 
+app.controller('navController', function() {
+    this.pane = 1;
+
+    this.changePane = function (selectedPane) {
+      this.pane = selectedPane;
+    }
+
+    this.setPane = function (newPane) {
+      return this.pane === newPane
+    }
+});
+
 app.controller('userController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
   controller.currentUser = userService.getUser()
@@ -142,11 +154,7 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $locationProvider.html5Mode(true);
   $routeProvider.when('/', {
-    templateUrl: 'views/login.html',
-    controller: 'userController',
-    controllerAs: 'userCtrl'
-  }).when('/users/login', {
-    templateUrl: 'views/login.html',
+    templateUrl: 'views/user/login.html',
     controller: 'userController',
     controllerAs: 'userCtrl'
   }).when('/users/:id/view', {
@@ -157,16 +165,8 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     templateUrl: 'views/user/view.html',
     controller: 'userController',
     controllerAs: 'userCtrl'
-  }).when('/users/all', {
-    templateUrl: 'views/user/all.html',
-    controller: 'userController',
-    controllerAs: 'userCtrl'
   }).when('/records/new', {
     templateUrl: 'views/record/new.html',
-    controller: 'recordController',
-    controllerAs: 'recordCtrl'
-  }).when('/records/all', {
-    templateUrl: 'views/record/all.html',
     controller: 'recordController',
     controllerAs: 'recordCtrl'
   })

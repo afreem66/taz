@@ -1,6 +1,11 @@
 <h1>{{userCtrl.currentUser.name}}</h1>
 <!-- this is the patient view -->
-<section id="patient-info" ng-show="userCtrl.currentUser.doctor == false">
+<div class="nav-panel" ng-controller="navController as navCtrl">
+  <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(1)">Information</button>
+  <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(2)">Records</button>
+  <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(3)">Doctors</button>
+
+<section id="patient-info" ng-show="navCtrl.setPane(1)">
 <h4 ng-show="userCtrl.currentUser.doctor == false">Your information</h4>
 <table  ng-show="userCtrl.currentUser.doctor == false">
   <thead>
@@ -27,7 +32,7 @@
   </tbody>
 </table>
 </section>
-<section id="patient-records" ng-show="userCtrl.currentUser.doctor == false">
+<section id="patient-records" ng-show="navCtrl.setPane(2)">
 <h4 ng-show="userCtrl.currentUser.doctor == false">Your Records</h4>
 <v-accordion id="patient-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
   <v-pane ng-repeat="record in userCtrl.currentUser.records track by $index">
@@ -35,17 +40,29 @@
       <p> {{record.complaint}} -- {{record.date | date:'MM/dd/yyyy'}} </p>
     </v-pane-header>
     <v-pane-content>
-      <p>
-        {{record.bodySystem}}
-        {{record.description}}
-        {{record.treatment}}
-      </p>
+      <div class="row">
+        <div class="one-third column">
+          <strong>Body System</strong>
+        </div>
+        <div class="one-third column">
+          <strong>Description of incident</strong>
+        </div>
+        <div class="one-third column">
+          <strong>Treatment</strong>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="one-third column" ng-bind="record.bodySystem"></div>
+        <div class="one-third column" ng-bind="record.description"></div>
+        <div class="one-third column" ng-bind="record.treatment"></div>
+      </div>
     </v-pane-content>
   </v-pane>
 </v-accordion>
 <a class="button" href='/records/new'>new record</a>
 </section>
-<section id="paient-doctors">
+<section id="paient-doctors" ng-show="navCtrl.setPane(3)" >
 <div class="doctors">
   <h4 ng-show="userCtrl.currentUser.doctor == false">Your Doctors</h4>
   <div class="doctor-tile" ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
@@ -62,6 +79,7 @@
   <button type="button" ng-click="userCtrl.findAllUsers()" ng-show="userCtrl.currentUser.doctor == false">Find a new Doctor</button>
 </div>
 </section>
+</div>
 <!-- this is the doctor view -->
 <table ng-show="userCtrl.currentUser.doctor == true">
   <thead>

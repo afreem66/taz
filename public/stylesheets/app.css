@@ -38,12 +38,18 @@ hr {
 }
 #patient-accordion {
   height: 80%;
-  overflow: scroll;
+}
+.button {
+  margin-top: 1rem;
 }
 button {
   margin-top: 1rem;
 }
-
+.nav {
+  margin-top: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
 .doctor-tile {
   margin-bottom: 1rem;
   margin-left: 1rem;
@@ -51,4 +57,10 @@ button {
   padding: 3px;
   border: 1px solid darkgray;
   display: inline-block;
+}
+input[type="radio"] {
+  position: relative;
+}
+footer {
+  position: absolute;
 }
