@@ -17,7 +17,7 @@ app.controller('navController', function() {
     this.pane = 1;
 
     this.changePane = function (selectedPane) {
-      this.pane = selectedPane;
+      this.pane = selectedPane
     }
 
     this.setPane = function (newPane) {

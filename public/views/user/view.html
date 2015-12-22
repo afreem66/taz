@@ -2,7 +2,7 @@
 <h1 ng-show="userCtrl.currentUser.doctor == true">Dr. {{userCtrl.currentUser.name}}</h1>
 
 <!-- this is the patient view -->
-<div class="nav-panel" ng-controller="navController as navCtrl" ng-show="userCtrl.currentUser.doctor == false">
+<div class="patient-container" ng-controller="navController as navCtrl" ng-show="userCtrl.currentUser.doctor == false">
   <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(1)">Information</button>
   <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(2)">Records</button>
   <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(3)">Doctors</button>
@@ -67,14 +67,30 @@
 <section id="paient-doctors" ng-show="navCtrl.setPane(3)" >
 <div class="doctors">
   <h4 ng-show="userCtrl.currentUser.doctor == false">Your Doctors</h4>
-  <div class="doctor-tile" ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
-    {{doc.name}}
-  </div>
+  <v-accordion class="vAccordion--default">
+    <v-pane ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
+      <v-pane-header><h6 ng-bind="doc.name"></h6></v-pane-header>
+      <v-pane-content>
+        <div class="row">
+          <div class="one-half column">
+            <strong>Hospital</strong>
+          </div>
+          <div class="one-half column">
+            <strong>Specialty</strong>
+          </div>
+        </div>
+        <div class="row">
+          <div class="one-half column" ng-bind="doc.hospital"></div>
+          <div class="one-half column" ng-bind="doc.specialty"></div>
+        </div>
+      </v-pane-content>
+    </v-pane>
+  </v-accordion>
 </div>
 <hr>
 <div class="new-doc" ng-show="userCtrl.currentUser.doctor == false">
   <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
-    {{doc.name}}
+    {{doc.name}} -
     {{doc.specialty}}
   </div>
 </br>
@@ -83,17 +99,18 @@
 </section>
 </div>
 <!-- this is the doctor view -->
-
-<v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
+<div class="doctor-container" ng-show="userCtrl.currentUser.doctor == true">
+  <h4>Your Patients</h4>
+<v-accordion id="doctor-accordion" class="vAccordion--default">
   <v-pane ng-repeat="patient in userCtrl.currentUser.patients track by $index">
     <v-pane-header>
-      <h4>{{patient.name}}</h4>
+      <h5>{{patient.name}}</h5>
     </v-pane-header>
     <v-pane-content>
       <v-accordion class="doctor-sub-accordion" class="vAccordion--default">
         <v-pane>
           <v-pane-header>
-            <h6>Patient information</h6>
+            <strong><h6>Patient information</h6></strong>
           </v-pane-header>
           <v-pane-content>
             {{patient.age}}
@@ -107,7 +124,7 @@
         </v-pane>
         <v-pane>
           <v-pane-header>
-            <h6>Patient Records</h6>
+            <strong><h6>Patient Records</h6></strong>
           </v-pane-header>
           <v-pane-content>
             <v-accordion class="doctor-sub-sub" class="vAccordion--default">
@@ -116,56 +133,30 @@
                   <h6> {{record.complaint}} -- {{record.date | date:'MM/dd/yyyy'}} </h6>
                 </v-pane-header>
                 <v-pane-content>
-                  <p>
-                    {{record.bodySystem}} |
-                    {{record.description}} |
-                    {{record.treatment}} |
-                  </p>
+                  <div class="row">
+                    <div class="one-third column">
+                      <strong>Body System</strong>
+                    </div>
+                    <div class="one-third column">
+                      <strong>Description of incident</strong>
+                    </div>
+                    <div class="one-third column">
+                      <strong>Treatment</strong>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="one-third column" ng-bind="record.bodySystem"></div>
+                    <div class="one-third column" ng-bind="record.description"></div>
+                    <div class="one-third column" ng-bind="record.treatment"></div>
+                  </div>
                 </v-pane-content>
               </v-pane>
           </v-accordion>
-          </v-pane-content>
-        </v-pane>
-        <v-pane>
-          <v-pane-header>
-            <h6> Add a new record </h6>
-          </v-pane-header>
-          <v-pane-content>
-            <form ng-submit="userCtrl.docRecord()" class="new-record">
-               <label for="date">Date</label>
-               <input type="date"
-                      ng-model="userCtrl.record.date"
-                      id="date"
-                      placeholder="When did it happen?">
-               <label for="complaint">Complaint</label>
-               <input type="text"
-                      ng-model="userCtrl.record.complaint"
-                      id="complaint"
-                      placeholder="What is wrong?">
-               </br>
-               <label for="body-system">Body System</label>
-               <input type="text"
-                      ng-model="userCtrl.record.bodySystem"
-                      id="body-system"
-                      placeholder="What part of the Body?">
-               </br>
-               <label for="description">Description</label>
-               <input type="text"
-                      ng-model="userCtrl.record.description"
-                      id="description"
-                      placeholder="Further Details?">
-               </br>
-               <label for="treatment">Treatment</label>
-               <input type="text"
-                      ng-model="userCtrl.record.treatment"
-                      id="treatment"
-                      placeholder="How was it treated?">
-               </br>
-               <input type="submit" value="Save">
-             </form>
           </v-pane-content>
         </v-pane>
       </v-accordion>
     </v-pane-content>
   </v-pane>
 </v-accordion>
+</div>

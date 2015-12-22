@@ -7,14 +7,17 @@ body {
   background: #f1f1f1;
   text-align: center;
   margin-bottom: 2rem;
+
 }
+
 
 v-accordion {
 /*margin: 10%, auto;*/
 padding: 0;
 }
+
 table {
-  margin: 0 auto;
+  margin: 1.5rem auto;
 }
 th, td {
   padding: 0 2rem;
@@ -40,10 +43,25 @@ hr {
   height: 80%;
 }
 .button {
-  margin-top: 1rem;
+  margin: 1rem 0;
+}
+.button:hover {
+  transition: .5s;
+  background: #333;
+  color: #f1f1f1;
 }
 button {
-  margin-top: 1rem;
+  margin: 1rem 0;
+}
+button:hover {
+  transition: .5s;
+  background: #333;
+  color: #f1f1f1;
+}
+input[type="submit"]:hover {
+  transition: .5s;
+  background: #333;
+  color: #f1f1f1;
 }
 .nav {
   margin-top: 0;
