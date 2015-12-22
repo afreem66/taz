@@ -1,6 +1,8 @@
-<h1>{{userCtrl.currentUser.name}}</h1>
+<h1 ng-show="userCtrl.currentUser.doctor == false">{{userCtrl.currentUser.name}}</h1>
+<h1 ng-show="userCtrl.currentUser.doctor == true">Dr. {{userCtrl.currentUser.name}}</h1>
+
 <!-- this is the patient view -->
-<div class="nav-panel" ng-controller="navController as navCtrl">
+<div class="nav-panel" ng-controller="navController as navCtrl" ng-show="userCtrl.currentUser.doctor == false">
   <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(1)">Information</button>
   <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(2)">Records</button>
   <button class="nav" type="button" name="button" ng-click="navCtrl.changePane(3)">Doctors</button>
@@ -81,20 +83,7 @@
 </section>
 </div>
 <!-- this is the doctor view -->
-<table ng-show="userCtrl.currentUser.doctor == true">
-  <thead>
-    <tr>
-      <th>Hospital</th>
-      <th>Sepcialty</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>{{userCtrl.currentUser.hospital}}</td>
-      <td>{{userCtrl.currentUser.specialty}}</td>
-    </tr>
-  <tbody/>
-<table/>
+
 <v-accordion id="doctor-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == true">
   <v-pane ng-repeat="patient in userCtrl.currentUser.patients track by $index">
     <v-pane-header>
@@ -104,7 +93,7 @@
       <v-accordion class="doctor-sub-accordion" class="vAccordion--default">
         <v-pane>
           <v-pane-header>
-            <h5>Patient information</h5>
+            <h6>Patient information</h6>
           </v-pane-header>
           <v-pane-content>
             {{patient.age}}
@@ -116,15 +105,15 @@
             {{patient.familyHistory}}
           </v-pane-content>
         </v-pane>
-        <v-pane ng-repeat="record in patient.records track by $index">
+        <v-pane>
           <v-pane-header>
             <h6>Patient Records</h6>
           </v-pane-header>
           <v-pane-content>
             <v-accordion class="doctor-sub-sub" class="vAccordion--default">
-              <v-pane>
+              <v-pane ng-repeat="record in patient.records track by $index">
                 <v-pane-header>
-                  <h6> {{record.complaint}} -- {{record.date}} </h6>
+                  <h6> {{record.complaint}} -- {{record.date | date:'MM/dd/yyyy'}} </h6>
                 </v-pane-header>
                 <v-pane-content>
                   <p>
