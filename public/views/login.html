@@ -2,7 +2,7 @@
 <v-accordion class="vAccordion--default">
   <v-pane expanded>
     <v-pane-header>
-      log in
+      <h5>log in</h5>
     </v-pane-header>
     <v-pane-content>
       <form class="login" ng-submit=userCtrl.login()>
@@ -14,42 +14,46 @@
   </v-pane>
   <v-pane>
     <v-pane-header>
-      create a new user
+      <h5>create a new user</h5>
     </v-pane-header>
     <v-pane-content>
       <form class="new-doc" ng-submit="userCtrl.userSignUp()">
-        <label for="email">Email</label>
-        <input type="email"
-               ng-model="userCtrl.user.email"
-               id="email"
-               placeholder="Your Email">
-        </br>
-        <label for="password">Password</label>
-        <input type="password"
-               ng-model="userCtrl.user.passwordDigest"
-               id="password"
-               placeholder="Enter a Password">
-        </br>
-        <label for="name">Name</label>
-        <input type="text"
-               ng-model="userCtrl.user.name"
-               id="name"
-               placeholder="First and Last Name">
-        </br>
+        <div class="row">
+         <div class="one-third column">
+          <label for="email">Email</label>
+          <input class="u-full-width" type="email"
+                 ng-model="userCtrl.user.email"
+                 id="email"
+                 placeholder="Your Email">
+         </div>
+         <div class="one-third column">
+          <label for="password">Password</label>
+          <input class="u-full-width" type="password"
+                 ng-model="userCtrl.user.passwordDigest"
+                 id="password"
+                 placeholder="Enter a Password">
+         </div>
+         <div class="one-third column">
+          <label for="name">Name</label>
+          <input class="u-full-width" type="text"
+                 ng-model="userCtrl.user.name"
+                 id="name"
+                 placeholder="First and Last Name">
+         </div>
+        </div>
         <label for="Patient or Doctor?">Doctor or Patient?</label>
         <label for="Doctor">Doctor</label>
         <input type="radio"
-               name="occupation"
+               name="Doctor"
                ng-model="userCtrl.user.doctor"
                id="Doctor"
                value="true">
        <label for="Patient">Patient</label>
         <input type="radio"
-               name="occupation"
+               name="Patient"
                ng-model="userCtrl.user.doctor"
                id="Patient"
                value="false">
-        </br>
         <div class="doctor-form" ng-show="userCtrl.user.doctor == 'true'">
         <label for="specialty">Speciality</label>
         <input type="text"
@@ -113,8 +117,8 @@
                  id="currentMedications"
                  placeholder="Are you currently taking medication?">
         </div>
+      </br>
         <input type="submit" value="Create">
       </form>
     </v-pane-content>
-
 </v-accordion>

@@ -1,5 +1,7 @@
 <h1>{{userCtrl.currentUser.name}}</h1>
 <!-- this is the patient view -->
+<section id="patient-info" ng-show="userCtrl.currentUser.doctor == false">
+<h4 ng-show="userCtrl.currentUser.doctor == false">Your information</h4>
 <table  ng-show="userCtrl.currentUser.doctor == false">
   <thead>
     <tr>
@@ -22,12 +24,15 @@
       <td ng-bind="userCtrl.currentUser.currentMedications"></td>
       <td ng-bind="userCtrl.currentUser.familyHistory"></td>
     </tr>
-  <tbody/>
-<table/>
+  </tbody>
+</table>
+</section>
+<section id="patient-records" ng-show="userCtrl.currentUser.doctor == false">
+<h4 ng-show="userCtrl.currentUser.doctor == false">Your Records</h4>
 <v-accordion id="patient-accordion" class="vAccordion--default" ng-show="userCtrl.currentUser.doctor == false">
   <v-pane ng-repeat="record in userCtrl.currentUser.records track by $index">
     <v-pane-header>
-      <h4> {{record.complaint}} -- {{record.date}} </h4>
+      <p> {{record.complaint}} -- {{record.date | date:'MM/dd/yyyy'}} </p>
     </v-pane-header>
     <v-pane-content>
       <p>
@@ -37,28 +42,26 @@
       </p>
     </v-pane-content>
   </v-pane>
-  <v-pane>
-    <v-pane-header>
-      <h6> new record </h6>
-    </v-pane-header>
-    <v-pane-content>
-      <a href='/records/new'>new record</a>
-    </v-pane-content>
-  </v-pane>
 </v-accordion>
-<div class="new-doctor-array">
-  <button type="button" ng-click="userCtrl.findAllUsers()" ng-show="userCtrl.currentUser.doctor == false">Find a new Doctor</button>
-  <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
-    {{doc.name}}
-    {{doc.specialty}}
-  </div>
-</div>
-<div class="doctor-array" ng-show="userCtrl.currentUser.doctor == false">
+<a class="button" href='/records/new'>new record</a>
+</section>
+<section id="paient-doctors">
+<div class="doctors">
+  <h4 ng-show="userCtrl.currentUser.doctor == false">Your Doctors</h4>
   <div class="doctor-tile" ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
     {{doc.name}}
   </div>
 </div>
-
+<hr>
+<div class="new-doc" ng-show="userCtrl.currentUser.doctor == false">
+  <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
+    {{doc.name}}
+    {{doc.specialty}}
+  </div>
+</br>
+  <button type="button" ng-click="userCtrl.findAllUsers()" ng-show="userCtrl.currentUser.doctor == false">Find a new Doctor</button>
+</div>
+</section>
 <!-- this is the doctor view -->
 <table ng-show="userCtrl.currentUser.doctor == true">
   <thead>
