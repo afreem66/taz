@@ -90,13 +90,13 @@ label[for=Patient]{
   display: inline-block;
   padding: 0.5rem;
 }
-input[id=male],
-input[id=female],
 label[for=female],
 label[for=male] {
   display: inline-block;
 }
-
+input,input[placeholder] {
+  text-align: center
+}
 footer {
   position: absolute;
 }

@@ -42,23 +42,19 @@
       <p> {{record.complaint}} -- {{record.date | date:'MM/dd/yyyy'}} </p>
     </v-pane-header>
     <v-pane-content>
-      <div class="row">
-        <div class="one-third column">
-          <strong>Body System</strong>
-        </div>
-        <div class="one-third column">
-          <strong>Description of incident</strong>
-        </div>
-        <div class="one-third column">
-          <strong>Treatment</strong>
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="one-third column" ng-bind="record.bodySystem"></div>
-        <div class="one-third column" ng-bind="record.description"></div>
-        <div class="one-third column" ng-bind="record.treatment"></div>
-      </div>
+      <table>
+        <thead class="row">
+          <th>Body System</th>
+          <th>Description of incident</th>
+          <th>Treatment</th>
+        </thead>
+        <tbody>
+          <td ng-bind="record.bodySystem"></td>
+          <td ng-bind="record.description"></td>
+          <td ng-bind="record.treatment"></td>
+        </tbody>
+      </table>
+      <h5>By: {{record.author}}</h5>
     </v-pane-content>
   </v-pane>
 </v-accordion>
@@ -67,26 +63,28 @@
 <section id="paient-doctors" ng-show="navCtrl.setPane(3)" >
 <div class="doctors">
   <h4 ng-show="userCtrl.currentUser.doctor == false">Your Doctors</h4>
-  <v-accordion class="vAccordion--default">
-    <v-pane ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
-      <v-pane-header><h6 ng-bind="doc.name"></h6></v-pane-header>
-      <v-pane-content>
-        <div class="row">
-          <div class="one-half column">
-            <strong>Hospital</strong>
-          </div>
-          <div class="one-half column">
-            <strong>Specialty</strong>
-          </div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="one-half column" ng-bind="doc.hospital"></div>
-          <div class="one-half column" ng-bind="doc.specialty"></div>
-        </div>
-      </v-pane-content>
-    </v-pane>
-  </v-accordion>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Name
+        </th>
+        <th>
+          Hospital
+        </th>
+        <th>
+          Specialty
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="doc in userCtrl.currentUser.doctors track by $index">
+        <td ng-bind="doc.name"></td>
+        <td ng-bind="doc.hospital"></td>
+        <td ng-bind="doc.specialty"></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <div class="new-doc" ng-show="userCtrl.currentUser.doctor == false">
   <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">

@@ -55,25 +55,70 @@
                id="Patient"
                value="false">
         <div class="doctor-form" ng-show="userCtrl.user.doctor == 'true'">
-        <label for="specialty">Speciality</label>
-        <input type="text"
-               ng-model="userCtrl.user.specialty"
-               id="specialty"
-               placeholder="What type of doctor are you?">
-        </br>
-        <label for="hospital">Hospital</label>
-        <input type="text"
-               ng-model="userCtrl.user.hospital"
-               id="hospital"
-               placeholder="Where do you practice?">
+          <div class="row">
+            <div class="one-half column">
+              <label for="specialty">Speciality</label>
+              <input type="text" class="u-full-width"
+                     ng-model="userCtrl.user.specialty"
+                     id="specialty"
+                     placeholder="What type of doctor are you?">
+            </div>
+            <div class="one-half column">
+              <label for="hospital">Hospital</label>
+              <input type="text" class="u-full-width"
+                     ng-model="userCtrl.user.hospital"
+                     id="hospital"
+                     placeholder="Where do you practice?">
+            </div>
+          </div>
         </div>
         <div class="patient-form" ng-if="userCtrl.user.doctor == 'false'")>
-          <label for="age">Age</label>
-          <input type="number"
-                 ng-model="userCtrl.user.age"
-                 id="age"
-                 placeholder="How old are you?">
-          </br>
+          <div class="row">
+            <div class="one-third column">
+              <label for="age">Age</label>
+              <input type="number" class="u-full-width"
+                     ng-model="userCtrl.user.age"
+                     id="age"
+                     placeholder="How old are you?">
+            </div>
+            <div class="one-third column">
+              <label for="height">Height</label>
+              <input type="text" class="u-full-width"
+                     ng-model="userCtrl.user.height"
+                     id="height"
+                     placeholder="How tall are you?">
+            </div>
+            <div class="one-third column">
+              <label for="weight">Weight</label>
+              <input type="number" class="u-full-width"
+                     ng-model="userCtrl.user.weight"
+                     id="weight"
+                     placeholder="How much do you weigh?">
+            </div>
+          </div>
+          <div class="row">
+            <div class="one-third column">
+              <label for="bloodPressure">Blood Pressure</label>
+              <input type="text" class="u-full-width"
+                     ng-model="userCtrl.user.bloodPressure"
+                     id="bloodPressure"
+                     placeholder="What is your blood pressure?">
+            </div>
+            <div class="one-third column">
+              <label for="familyHistory">Family Medical History</label>
+              <input type="text" class="u-full-width"
+                     ng-model="userCtrl.user.familyHistory"
+                     id="familyHistory"
+                     placeholder="Any inherited medical conditions?">
+            </div>
+            <div class="one-third column">
+              <label for="currentMedications">Current Medications</label>
+              <input type="text" class="u-full-width"
+                     ng-model="userCtrl.user.currentMedications"
+                     id="currentMedications"
+                     placeholder="Are you currently taking medication?">
+            </div>
+          </div>
           <label for="Gender">Gender</label>
           <label for="female">Female</label>
           <input type="radio"
@@ -87,37 +132,8 @@
                  ng-model="userCtrl.user.gender"
                  id="male"
                  value="male">
-          </br>
-          <label for="height">Height</label>
-          <input type="text"
-                 ng-model="userCtrl.user.height"
-                 id="height"
-                 placeholder="How tall are you?">
-          </br>
-          <label for="weight">Weight</label>
-          <input type="number"
-                 ng-model="userCtrl.user.weight"
-                 id="weight"
-                 placeholder="How much do you weigh?">
-          </br>
-          <label for="bloodPressure">Blood Pressure</label>
-          <input type="text"
-                 ng-model="userCtrl.user.bloodPressure"
-                 id="bloodPressure"
-                 placeholder="What is your blood pressure?">
-          <label for="familyHistory">Family Medical History</label>
-          <input type="text"
-                 ng-model="userCtrl.user.familyHistory"
-                 id="familyHistory"
-                 placeholder="Any inherited medical conditions?">
-          </br>
-          <label for="currentMedications">Current Medications</label>
-          <input type="text"
-                 ng-model="userCtrl.user.currentMedications"
-                 id="currentMedications"
-                 placeholder="Are you currently taking medication?">
         </div>
-      </br>
+        </br>
         <input type="submit" value="Create">
       </form>
     </v-pane-content>
