@@ -109,9 +109,9 @@ app.controller('userController', ['$http', '$location', 'userService', function(
       treatment: controller.record.treatment,
       author: userService.getUser().name,
       date: controller.record.date
-    }).then(function(data) {
-      if (data.data.record) {
-        userService.getUser().patients[index].records.push(data.data.record);
+    }).then(function(response) {
+      if (response.data.record) {
+        userService.getUser().patients[index].records.push(response.data.record);
       } else {
         $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
       }
@@ -124,10 +124,6 @@ app.controller('userController', ['$http', '$location', 'userService', function(
 
 app.controller('recordController', ['$http', '$location', 'userService', function($http, $location, userService) {
   var controller = this;
-
-  // $http.get('/records/all').success(function (data) {
-  //   controller.records = data;
-  // });
 
   this.createRecord = function () {
     $http.post('/records/new', {
@@ -149,6 +145,26 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
     });
   }
 
+  this.newRecord = function (index) {
+    $http.post('user/:id/view/patientId', {
+      complaint: controller.record.complaint,
+      bodySystem: controller.record.bodySystem,
+      description: controller.record.description,
+      treatment: controller.record.treatment,
+      author: userService.getUser().name,
+      date: controller.record.date
+    }).then(function(response){
+      if (response) {
+        userService.getUser().patients[index].records.push(response.data.record)
+        $location.path('users/' + )
+      } else {
+        console.log(response);
+      }
+    }, function (err) {
+      console.log(err);
+    });
+  }
+  
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
@@ -162,6 +178,10 @@ app.config(['$routeProvider', '$locationProvider', function($routeProvider, $loc
     controller: 'userController',
     controllerAs: 'userCtrl'
   }).when('/users/:id/view/:docId', {
+    templateUrl: 'views/user/view.html',
+    controller: 'userController',
+    controllerAs: 'userCtrl'
+  }).when ('users/:id/view/:patientId', {
     templateUrl: 'views/user/view.html',
     controller: 'userController',
     controllerAs: 'userCtrl'
