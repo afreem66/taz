@@ -79,6 +79,7 @@
             <strong>Specialty</strong>
           </div>
         </div>
+        <hr>
         <div class="row">
           <div class="one-half column" ng-bind="doc.hospital"></div>
           <div class="one-half column" ng-bind="doc.specialty"></div>
@@ -87,11 +88,11 @@
     </v-pane>
   </v-accordion>
 </div>
-<hr>
 <div class="new-doc" ng-show="userCtrl.currentUser.doctor == false">
   <div ng-repeat="doc in userCtrl.doctors track by $index" ng-click="userCtrl.addDoctor($index)" class="doctor-tile">
     {{doc.name}} -
-    {{doc.specialty}}
+    {{doc.specialty}} -
+    {{doc.hospital}}
   </div>
 </br>
   <button type="button" ng-click="userCtrl.findAllUsers()" ng-show="userCtrl.currentUser.doctor == false">Find a new Doctor</button>

@@ -9,8 +9,6 @@ body {
   margin-bottom: 2rem;
 
 }
-
-
 v-accordion {
 /*margin: 10%, auto;*/
 padding: 0;
@@ -22,6 +20,10 @@ table {
 th, td {
   padding: 0 2rem;
   text-align: center;
+}
+
+form {
+  margin: 0 1rem;
 }
 
 h1 {
@@ -76,9 +78,25 @@ input[type="submit"]:hover {
   border: 1px solid darkgray;
   display: inline-block;
 }
-input[type="radio"] {
-  position: relative;
+input[id=Doctor],
+input[id=Patient]
+ {
+  display: none;
 }
+label[for=Doctor],
+label[for=Patient]{
+  border: 1px solid #333;
+  background: #f1f1f1;
+  display: inline-block;
+  padding: 0.5rem;
+}
+input[id=male],
+input[id=female],
+label[for=female],
+label[for=male] {
+  display: inline-block;
+}
+
 footer {
   position: absolute;
 }
