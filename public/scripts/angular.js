@@ -101,24 +101,6 @@ app.controller('userController', ['$http', '$location', 'userService', function(
         console.log(err);
       });
   }
-  this.docRecord = function() {
-    $http.post('/users/:id/view', {
-      complaint: controller.record.complaint,
-      bodySystem: controller.record.bodySystem,
-      description: controller.record.description,
-      treatment: controller.record.treatment,
-      author: userService.getUser().name,
-      date: controller.record.date
-    }).then(function(response) {
-      if (response.data.record) {
-        userService.getUser().patients[index].records.push(response.data.record);
-      } else {
-        $('body').append('<h2>Sorry, there was an error posting your record--try again!</h2>');
-      }
-    }, function(err) {
-      console.log(err);
-    })
-  }
 
 }]);
 
@@ -146,7 +128,10 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
   }
 
   this.newRecord = function (index) {
-    $http.post('user/:id/view/patientId', {
+    var patientId = userService.getUser().patients[index]._id,
+        docId = userService.getUser()._id;
+
+    $http.post('user/' + docId + '/view/' + patientId , {
       complaint: controller.record.complaint,
       bodySystem: controller.record.bodySystem,
       description: controller.record.description,
@@ -164,7 +149,7 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
       console.log(err);
     });
   }
-  
+
 }]);
 
 app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
