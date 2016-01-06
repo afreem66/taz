@@ -141,7 +141,6 @@ app.controller('recordController', ['$http', '$location', 'userService', functio
     }).then(function(response){
       if (response) {
         userService.getUser().patients[index].records.push(response.data.record)
-        $location.path('users/' + )
       } else {
         console.log(response);
       }

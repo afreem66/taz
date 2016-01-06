@@ -19,9 +19,6 @@ server.use(session({
   saveUninitialized: true
 }));
 
-// server.set('views', './views');
-// server.set('view engine', 'html');
-
 server.use(express.static('./public'));
 
 server.use(methodOverride('_method'));
